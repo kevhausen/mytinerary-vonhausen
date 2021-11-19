@@ -1,38 +1,58 @@
-.App {
-  text-align: center;
+/* normalize */
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* LA FONT FAMILY NO ME CONVENCE */
+* {
+  font-family: Georgia, “Playfair Display”, “Didot”, "Times New Roman", Times,
+    serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.img {
+  width: 20rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.social-icon {
+  width: 1rem;
+  transition: 0.2s;
+}
+.user-icon {
+  width: 2rem;
+}
+
+div a {
+  color: white !important;
+}
+
+.navbar-light .navbar-nav .nav-link {
   color: white;
+  font-weight: bold;
+  font-size: 2rem;
 }
 
-.App-link {
-  color: #61dafb;
+.nav-link:hover {
+  color: #122e43 !important;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.hover-white:hover {
+  transition: 0.2s;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(161deg)
+    brightness(102%) contrast(101%);
+}
+
+.social-icon:hover {
+  width: 1.4rem;
+}
+
+.firstSection {
+  background-image: url("./assets/first-section.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
 }
