@@ -15,7 +15,15 @@
 }
 
 .img {
-  width: 20rem;
+  /* width: 5rem; */
+  /* object-fit: cover; */
+  
+}
+
+.image-about{
+    background-image: url("https://livedemo00-joomla.template-help.com/joomla_prod-25646/images/page1-img1.jpg");
+    background-repeat: no-repeat;
+    object-fit: contain;
 }
 
 .social-icon {
@@ -55,4 +63,70 @@ div a {
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh;
+  max-height: 100vh;
+}
+
+.aboutUs{
+    min-height: 100vh;
+  max-height: 100vh;
+}
+
+.slideShow{
+    min-height: 100vh;
+  max-height: 100vh;
+  background-color: #122e43;
+}
+
+
+.nav-brands {
+  margin-right: 0px !important;
+}
+
+.main-nav {
+  padding-right: 0px !important;
+}
+
+.ballon {
+  width: 6rem;
+  filter: invert(100%) sepia(0%) saturate(7447%) hue-rotate(191deg)
+    brightness(112%) contrast(116%);
+}
+
+.action-call {
+  background-color: rgba(255, 255, 255, 0.493);
+  border-radius: 0px;
+
+  box-shadow: 5px 5px 7px #00000085;
+}
+
+.white-button {
+  background-color: #122e43;
+  color: white;
+  box-shadow: 3px 3px 1px #00000085;
+  padding: 1.3rem;
+
+}
+
+.white-button:hover {
+  transition: 0.3s;
+  background-color: white;
+  color: #122e43;
+
+}
+
+.transparent-button {
+  background-color: rgba(0, 0, 0, 0);
+  box-shadow: 3px 3px 1px #00000085;
+}
+
+.transparent-button:hover {
+  transition: 0.3s;
+  background-color: #122e432d;
+}
+
+.hero-mytinerary {
+  /* border-radius: 50px; */
+  box-shadow: 3px 3px 1px #00000085;
+  background-color: #122e43;
+  padding: 3%;
 }

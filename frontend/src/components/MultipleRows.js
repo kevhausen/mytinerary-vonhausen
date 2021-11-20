@@ -17,60 +17,30 @@ export default class MultipleRows extends Component {
       rows: 2,
       slidesPerRow: 1
     };
+    const numbers = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
     return (
-      <Container>
-        <h2>Multiple Rows</h2>
+      <Container fluid className="slideShow">
+          <Container>
+
+          
+        <h2 className="text-light">Multiple Rows</h2>
         <Slider {...settings}>
             {/* generar div de forma dinamica, segun la cantidad de elementos de un array */}
-          <div>
-            <h3>1</h3>
-          </div>
-          <div>
-            <h3>2</h3>
-          </div>
-          <div>
-            <h3>3</h3>
-          </div>
-          <div>
-            <h3>4</h3>
-          </div>
-          <div>
-            <h3>5</h3>
-          </div>
-          <div>
-            <h3>6</h3>
-          </div>
-          <div>
-            <h3>7</h3>
-          </div>
-          <div>
-            <h3>8</h3>
-          </div>
-          <div>
-            <h3>9</h3>
-          </div>
-          <div>
-            <h3>10</h3>
-          </div>
-          <div>
-            <h3>11</h3>
-          </div>
-          <div>
-            <h3>12</h3>
-          </div>
-          <div>
-            <h3>13</h3>
-          </div>
-          <div>
-            <h3>14</h3>
-          </div>
-          <div>
-            <h3>15</h3>
-          </div>
-          <div>
-            <h3>16</h3>
-          </div>
+            {
+                numbers.map(e=>{
+                    return(
+                    <div>
+                        <h3>{e}</h3>
+                      </div>
+                      )
+                        
+                    
+                })
+
+            }
+        
         </Slider>
+        </Container>
       </Container>
     );
   }
