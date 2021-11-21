@@ -5,6 +5,7 @@ import ActionCall from "../components/ActionCall";
 import AboutUs from "../components/AboutUs";
 import Footer from "../components/Footer";
 import FirstSection from "../components/FirstSection";
+import SingleSlide from "../components/SingleSlide";
 
 
 export default class Home extends React.Component {
@@ -13,6 +14,7 @@ export default class Home extends React.Component {
             <>
                 <FirstSection />
                 <AboutUs />
+                <SingleSlide />
                 <MultipleRows />
                 <Footer />
 
