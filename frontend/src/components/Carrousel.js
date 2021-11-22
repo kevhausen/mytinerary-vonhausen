@@ -1,16 +1,12 @@
 import Carousel from "react-bootstrap/Carousel";
-import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import { useEffect, useState } from "react";
 import CarrouselPack from "./CarrouselPack.js";
 
 function Carrousel() {
   const [array, setArray] = useState([{ name: "", country: "", image: "" }]);
-  const [index, setIndex] = useState(0);
-  const [interval, setInterval] = useState(2000);
-  // set the amount of desired images per slide
   const imagesPerSlide = 4;
+  let currentIndex = 0
 
   useEffect(() => {
     const citiesArray = [
@@ -88,89 +84,33 @@ function Carrousel() {
       },
     ];
     simulateFetch(citiesArray);
-    console.log("se simula fetch");
   }, []);
 
   const simulateFetch = (list) => {
     setArray(list);
   };
-//   el handleSelect tendria que modificar el state del componente CarrouselPack, para que este se actualice con cada click. Hay que sacar
-// el modificamiento al state del componente Carrousel. 
-  const handleSelect = (selectedIndex, e) => {
-    if (e.target.className.includes("next")) {
-      if (index >= array.length - imagesPerSlide) {
-        setIndex(0);
-      } else {
-        setIndex(index + imagesPerSlide);
+  const handleSelect = (_, e) => {
+      if(e !== undefined){
+        e.target.className.includes("next") ? (currentIndex >= array.length ? currentIndex=0 : currentIndex = currentIndex + imagesPerSlide) : 
+         (currentIndex <= 0 ? currentIndex = array.length - imagesPerSlide : currentIndex = currentIndex - imagesPerSlide )
       }
-    } else {
-      if (index <= 0) {
-        setIndex(array.length - imagesPerSlide);
-      } else {
-        setIndex(index - imagesPerSlide);
-      }
-    }
-  };
-  const araytest = [1, 2, 3];
-
-  const handleInterval = (number, direction) => {
-    if (number === 0) {
-      setInterval(2000);
-    } else {
-      setInterval(0);
-      setIndex(index + 4);
-    }
-    console.log(number);
-    console.log(direction);
   };
 
-  // tengo que hacerle un override a la flechita y al intervalo, para que cuando uno de los dos ocurra, se haga un setState de index +4
   return (
-    <Carousel interval={null} onSelect={handleSelect}>
-      {console.log(
-        "se ejecuta return con indice " + index + " y array " + array.length
-      )}
-      {araytest.map((e) => (
+    <Carousel interval={3000} onSelect={handleSelect}>
+      
+      {Array.from({length : array.length/imagesPerSlide }).map((e) => (
         <Carousel.Item>
           <Row xs={1} md={2} className="g-4">
-            {/* <CarrouselPack
+            <CarrouselPack
               list={array}
-              index={index}
+              index={currentIndex}
               imgPerSlide={imagesPerSlide}
-            /> */}
-            {array.slice(index, index + imagesPerSlide).map((city) => (
-              <Col>
-                <Card>
-                  <Card.Img variant="top" src={city.image} />
-                  {console.log("se renderiza" + city.name)}
-                  <Card.Body>
-                    <Card.Title>{city.name}</Card.Title>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
+            />
+            {currentIndex += imagesPerSlide}
           </Row>
         </Carousel.Item>
       ))}
-      {/* <Carousel.Item>
-  <Row xs={1} md={2} className="g-4">
-  {array.slice(index,index+imagesPerSlide).map((city) => (
-      
-    <Col>
-      <Card>
-        <Card.Img variant="top" src={city.image} />
-        {
-            console.log('se renderiza' + city.name)
-        }
-        <Card.Body>
-          <Card.Title>{city.name}</Card.Title>
-        </Card.Body>
-      </Card>
-    </Col>
-  ))}
-</Row>
-  </Carousel.Item>
-   */}
     </Carousel>
   );
 }

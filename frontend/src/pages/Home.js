@@ -15,8 +15,6 @@ export default class Home extends React.Component {
             <>
                 <FirstSection />
                 <AboutUs />
-                {/* <SingleSlide /> */}
-                {/* <MultipleRows /> */}
                 <Carrousel />
                 <Footer />
 
