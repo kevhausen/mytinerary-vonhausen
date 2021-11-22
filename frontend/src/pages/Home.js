@@ -6,6 +6,7 @@ import AboutUs from "../components/AboutUs";
 import Footer from "../components/Footer";
 import FirstSection from "../components/FirstSection";
 import SingleSlide from "../components/SingleSlide";
+import Carrousel from "../components/Carrousel";
 
 
 export default class Home extends React.Component {
@@ -14,8 +15,9 @@ export default class Home extends React.Component {
             <>
                 <FirstSection />
                 <AboutUs />
-                <SingleSlide />
-                <MultipleRows />
+                {/* <SingleSlide /> */}
+                {/* <MultipleRows /> */}
+                <Carrousel />
                 <Footer />
 
             </>

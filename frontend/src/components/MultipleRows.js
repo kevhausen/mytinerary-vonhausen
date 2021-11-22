@@ -15,13 +15,8 @@ export default class MultipleRows extends Component {
       slidesPerRow: 1,
     };
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
-    return (
-      <Container fluid className="slideShow">
-        <Container>
-          <h2 className="text-light">Multiple Rows</h2>
-          <Slider {...settings}>
-            {/* generar div de forma dinamica, segun la cantidad de elementos de un array */}
-            {/* en la tercera seccion, debe haber un carrousel, y el item de 4 cartas, debe ser escrito en un componente aparte, 
+    /* generar div de forma dinamica, segun la cantidad de elementos de un array */
+    /* en la tercera seccion, debe haber un carrousel, y el item de 4 cartas, debe ser escrito en un componente aparte, 
             para que se renderice solo lo necesario. este componente lo llamamos slideItem. el slideItem le va a hacer un map a una lista de imagenes, 
             que va a entregar de 4 en 4 con cada click o intervalo de tiempo. para sacar de 4 en 4, es necesario definir un state inicial con idex 0, 
             que ira seteandose con cada intervalo o click, en 4+ (es decir, inicialmente el index seria 0, lo que cargaria las primeras 4 imagenes del array, 
@@ -30,7 +25,12 @@ export default class MultipleRows extends Component {
             seria array.splice(this.state.index,4). en el caso que el index supere las imagenes totales habria de 
             condiconar con if(currentIndex+{4}>=array.length : entonces, setIndex a 0) esto lo que hace es que si se llega al final de la lista, 
             volver al inicio. Hay que hacer lo mismo para atras,es decir, si el currentIndex < 0, entonces se setIndex a array.length-1-{4}; 
-            esto quiere decir, que si volvemos desde la primera imagen, se va a las ultimas 4.) */}
+            esto quiere decir, que si volvemos desde la primera imagen, se va a las ultimas 4.) */
+    return (
+      <Container fluid className="slideShow">
+        <Container>
+          <h2 className="text-light">Multiple Rows</h2>
+          <Slider {...settings}>
             {numbers.map((e) => {
               return (
                 <div>

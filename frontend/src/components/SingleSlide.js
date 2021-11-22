@@ -4,7 +4,7 @@ function SingleSlide() {
     const [array,setArray] = useState([{name:'',country:'',image:''}])
 
 
-    // se simula un fetch con los datos de las ciudades
+    // se simula un fetch con los datos de las ciudades usando el useEffect que simula el ComponenDidMount
     useEffect(()=>{
         // aca se hacen los fetch, ya que se ejecuta una vez
          const citiesArray = [

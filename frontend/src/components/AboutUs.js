@@ -3,7 +3,7 @@ import Image from "react-bootstrap/Image";
 
 function AboutUs() {
   return (
-    <Container className="aboutUs d-flex">
+    <Container className="aboutUs d-flex p-5">
       <Container className="d-flex align-items-center flex-column justify-content-center">
         <h2>EXPLORE A DIFFERENT WAY TO TRAVEL</h2>
         <p>
