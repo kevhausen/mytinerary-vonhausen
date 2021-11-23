@@ -2,12 +2,11 @@ import Carousel from "react-bootstrap/Carousel";
 import Row from "react-bootstrap/Row";
 import { useEffect, useState } from "react";
 import CarrouselPack from "./CarrouselPack.js";
-import Container from "react-bootstrap/esm/Container";
 
 function Carrousel() {
   const [array, setArray] = useState([{ name: "", country: "", image: "" }]);
   const imagesPerSlide = 4;
-  let currentIndex = 0
+  let currentIndex = 0;
 
   useEffect(() => {
     const citiesArray = [
@@ -24,16 +23,24 @@ function Carrousel() {
           "https://www.planetware.com/wpimages/2020/03/world-most-visited-cities-delhi-india.jpg",
       },
       {
-        name: "Dubai",
-        country: "United Arab Emirates",
+        name: "Antalya",
+        country: "Turkey",
         image:
-          "https://www.planetware.com/wpimages/2020/03/world-most-visited-cities-dubai-united-arab-emirates.jpg",
+          "https://www.planetware.com/wpimages/2020/03/world-most-visited-cities-antalya-turkey.jpg",
       },
+
+
+    //   {
+    //     name: "Dubai",
+    //     country: "United Arab Emirates",
+    //     image:
+    //       "https://www.planetware.com/wpimages/2020/03/world-most-visited-cities-dubai-united-arab-emirates.jpg",
+    //   },
       {
-        name: "Hong Kong",
-        country: "China",
+        name: "Singapore",
+        country: "Singapore",
         image:
-          "https://www.planetware.com/wpimages/2020/03/world-most-visited-cities-hong-kong.jpg",
+          "https://www.planetware.com/wpimages/2020/03/world-most-visited-cities-singapore.jpg",
       },
       {
         name: "Istanbul",
@@ -91,33 +98,36 @@ function Carrousel() {
     setArray(list);
   };
   const handleSelect = (_, e) => {
-      if(e !== undefined){
-        e.target.className.includes("next") ? (currentIndex >= array.length ? currentIndex=0 : currentIndex = currentIndex + imagesPerSlide) : 
-         (currentIndex <= 0 ? currentIndex = array.length - imagesPerSlide : currentIndex = currentIndex - imagesPerSlide )
-      }
+    if (e !== undefined) {
+      e.target.className.includes("next")
+        ? currentIndex >= array.length
+          ? (currentIndex = 0)
+          : (currentIndex = currentIndex + imagesPerSlide)
+        : currentIndex <= 0
+        ? (currentIndex = array.length - imagesPerSlide)
+        : (currentIndex = currentIndex - imagesPerSlide);
+    }
   };
 
   return (
-      
-    <Carousel interval={3000} onSelect={handleSelect} >
-      
-      {Array.from({length : array.length/imagesPerSlide }).map((e,mapIndex) => (
-        <Carousel.Item key={mapIndex}>
-          <Row xs={1} sm={2} md={2} lg={4} className="g-4">
-            <CarrouselPack
-              list={array}
-              index={currentIndex}
-              imgPerSlide={imagesPerSlide}
-              
-            />
-            <span className="invisible">
-            {currentIndex += imagesPerSlide}
-            </span>
-          </Row>
-        </Carousel.Item>
-      ))}
+    <Carousel interval={3000} onSelect={handleSelect}>
+      {Array.from({ length: array.length / imagesPerSlide }).map(
+        (e, mapIndex) => (
+          <Carousel.Item key={mapIndex} className="p-2">
+            <Row xs={1} sm={2} md={2} lg={4} className="g-4">
+              <CarrouselPack
+                list={array}
+                index={currentIndex}
+                imgPerSlide={imagesPerSlide}
+              />
+              <span className="invisible">
+                {(currentIndex += imagesPerSlide)}
+              </span>
+            </Row>
+          </Carousel.Item>
+        )
+      )}
     </Carousel>
-    
   );
 }
 

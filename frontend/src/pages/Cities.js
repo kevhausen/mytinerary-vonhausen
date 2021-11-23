@@ -1,15 +1,14 @@
 import React from "react";
 import CitiesSection from "../components/CitiesSection";
-import MainNav from "../components/MainNav";
+import Footer from "../components/Footer";
 
 export default class Cities extends React.Component {
-    render(){
-        return(
-            <>
-            <CitiesSection />
-                
-
-            </>
-        )
-    }
+  render() {
+    return (
+      <>
+        <CitiesSection />
+        <Footer />
+      </>
+    );
+  }
 }
