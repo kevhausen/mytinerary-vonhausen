@@ -2,6 +2,7 @@ import Carousel from "react-bootstrap/Carousel";
 import Row from "react-bootstrap/Row";
 import { useEffect, useState } from "react";
 import CarrouselPack from "./CarrouselPack.js";
+import Container from "react-bootstrap/esm/Container";
 
 function Carrousel() {
   const [array, setArray] = useState([{ name: "", country: "", image: "" }]);
@@ -97,21 +98,26 @@ function Carrousel() {
   };
 
   return (
-    <Carousel interval={3000} onSelect={handleSelect}>
       
-      {Array.from({length : array.length/imagesPerSlide }).map((e) => (
-        <Carousel.Item>
-          <Row xs={1} md={2} className="g-4">
+    <Carousel interval={3000} onSelect={handleSelect} >
+      
+      {Array.from({length : array.length/imagesPerSlide }).map((e,mapIndex) => (
+        <Carousel.Item key={mapIndex}>
+          <Row xs={1} sm={2} md={2} lg={4} className="g-4">
             <CarrouselPack
               list={array}
               index={currentIndex}
               imgPerSlide={imagesPerSlide}
+              
             />
+            <span className="invisible">
             {currentIndex += imagesPerSlide}
+            </span>
           </Row>
         </Carousel.Item>
       ))}
     </Carousel>
+    
   );
 }
 

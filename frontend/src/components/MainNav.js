@@ -8,24 +8,26 @@ import { Link } from "react-router-dom";
 
 function MainNav() {
   return (
-    <Navbar collapseOnSelect expand="lg">
+    <Navbar collapseOnSelect expand="lg" className="main-nav-container">
       <Container>
+            <Nav>
+        <Link className="hover-white" to="/account" > <Image className="user-icon" src={User}></Image> </Link>
+          </Nav>
+      <Link to="/" className="nav-brands">
+              <img className="mytinerary-logo" src={Logo} alt="Mytinerary Logo"></img>
+            </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="d-flex justify-content-center container align-items-center main-nav">
             <Link className="nav-link" to="/">Home</Link>
-            <Link className="nav-link" to="/">About Us</Link>
+            <Link className="nav-link" to="/">About</Link>
             <Link className="nav-link" to="/cities">Cities</Link>
-            <Link to="/" className="nav-brands">
-              <img width="300px" src={Logo} alt="Mytinerary Logo"></img>
-            </Link>
+            
             <Link className="nav-link" to="/reservation">Reservation</Link>
             <Link className="nav-link" to="/contact">Contact</Link>
-            <Nav>
-        <Link className="hover-white" to="/account" > <Image className="user-icon" src={User}></Image> </Link>
-          </Nav>
           </Nav>        
         </Navbar.Collapse>      
+          
       </Container>   
     </Navbar>
   );

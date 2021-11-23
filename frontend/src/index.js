@@ -11,22 +11,20 @@ import Cities from "./pages/Cities";
 import Reservation from "./pages/Reservation";
 import Contact from "./pages/Contact";
 import Account from "./pages/Account";
-import ErrorPage from "./pages/404";
+import ErrorPage from "./pages/ErrorPage";
 
 ReactDOM.render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App />} >
+      <Route path="/" element={<App />} />
       
       <Route path="reservation" element={<Reservation />} />
       <Route path="contact" element={<Contact />} />
       <Route path="account" element={<Account />} />
       
-      </Route>
+      
       <Route path="cities" element={<Cities />} />
-      <Route
-      path="*"
-      element={<ErrorPage />}
+      <Route path="*" element={<ErrorPage />}
     />
     </Routes>
     

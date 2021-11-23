@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import FirstSection from "../components/FirstSection";
 import SingleSlide from "../components/SingleSlide";
 import Carrousel from "../components/Carrousel";
+import CarrouselSection from "../components/CarrouselSection";
 
 
 export default class Home extends React.Component {
@@ -15,7 +16,7 @@ export default class Home extends React.Component {
             <>
                 <FirstSection />
                 <AboutUs />
-                <Carrousel />
+                <CarrouselSection />
                 <Footer />
 
             </>
