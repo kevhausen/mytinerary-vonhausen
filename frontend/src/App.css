@@ -99,6 +99,9 @@ div a {
 
 .text-shadow {
   text-shadow: 2px 2px black;
+  background-color: #122e438e;
+  padding: 4px;
+  text-align: center;
 }
 
 .search-input:hover {
@@ -253,11 +256,6 @@ hr.dashed {
 }
 
 @media only screen and (max-width: 780px) {
-  .text-shadow {
-    background-color: #122e438e;
-    padding: 4px;
-    text-align: center;
-  }
   .footer-row {
     display: flex;
     flex-direction: column;

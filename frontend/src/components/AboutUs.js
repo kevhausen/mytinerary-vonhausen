@@ -2,8 +2,8 @@ import Container from "react-bootstrap/esm/Container";
 
 function AboutUs() {
   return (
-    <Container fluid className="aboutUs d-flex p-5 justify-content-start">
-      <Container className="d-flex flex-column justify-content-center col-12 m-0 col-sm-10 col-md-9 col-lg-7 col-xl-6 col-xxl-4">
+    <Container fluid className="aboutUs d-flex p-5 justify-content-center">
+      <Container className="col-12 m-0 col-sm-10 col-md-9 col-lg-7 col-xl-6 col-xxl-4 p-5 align-self-left">
         <h2 className="text-light fw-bold text-shadow">
           EXPLORE A DIFFERENT WAY TO TRAVEL
         </h2>

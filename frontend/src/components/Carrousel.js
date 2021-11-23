@@ -28,14 +28,6 @@ function Carrousel() {
         image:
           "https://www.planetware.com/wpimages/2020/03/world-most-visited-cities-antalya-turkey.jpg",
       },
-
-
-    //   {
-    //     name: "Dubai",
-    //     country: "United Arab Emirates",
-    //     image:
-    //       "https://www.planetware.com/wpimages/2020/03/world-most-visited-cities-dubai-united-arab-emirates.jpg",
-    //   },
       {
         name: "Singapore",
         country: "Singapore",
