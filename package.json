@@ -1,0 +1,31 @@
+{
+  "name": "mytinerary-vonhausen",
+  "version": "1.0.0",
+  "description": "backend of mytinerary",
+  "main": "server.js",
+  "scripts": {
+      
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "nodemon serner.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevhausen/mytinerary-vonhausen.git"
+  },
+  "keywords": [
+    "react",
+    "node",
+    "mongo",
+    "itineraray"
+  ],
+  "author": "Kevin von Hausen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kevhausen/mytinerary-vonhausen/issues"
+  },
+  "homepage": "https://github.com/kevhausen/mytinerary-vonhausen#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  }
+}

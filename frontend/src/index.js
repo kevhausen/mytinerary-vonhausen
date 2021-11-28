@@ -11,8 +11,16 @@ import Reservation from "./pages/Reservation";
 import Contact from "./pages/Contact";
 import Account from "./pages/Account";
 import ErrorPage from "./pages/ErrorPage";
+import City from "./pages/City"
+import withRouter from "./utilities/withRouter"
+
+
+const CityDinamic = withRouter(City)
+// const itinerary = withRouter(Itinerary) paso 1
 
 ReactDOM.render(
+    
+   
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />} />
@@ -20,8 +28,8 @@ ReactDOM.render(
       <Route path="reservation" element={<Reservation />} />
       <Route path="contact" element={<Contact />} />
       <Route path="account" element={<Account />} />
-      
-      
+      <Route path="cities/:id"  element={<CityDinamic />} />   
+      {/* <Route path="cities/:cityName/:itineraryId" element={<Itinerary />}  paso 2*/}
       <Route path="cities" element={<Cities />} />
       <Route path="*" element={<ErrorPage />}
     />

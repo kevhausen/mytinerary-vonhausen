@@ -9,86 +9,14 @@ function Carrousel() {
   let currentIndex = 0;
 
   useEffect(() => {
-    const citiesArray = [
-      {
-        name: "Bangkok",
-        country: "Thailand",
-        image:
-          "https://www.planetware.com/wpimages/2020/03/world-most-visited-cities-bangkok-thailand.jpg",
-      },
-      {
-        name: "Delhi",
-        country: "India",
-        image:
-          "https://www.planetware.com/wpimages/2020/03/world-most-visited-cities-delhi-india.jpg",
-      },
-      {
-        name: "Antalya",
-        country: "Turkey",
-        image:
-          "https://www.planetware.com/wpimages/2020/03/world-most-visited-cities-antalya-turkey.jpg",
-      },
-      {
-        name: "Singapore",
-        country: "Singapore",
-        image:
-          "https://www.planetware.com/wpimages/2020/03/world-most-visited-cities-singapore.jpg",
-      },
-      {
-        name: "Istanbul",
-        country: "Turkey",
-        image:
-          "https://www.planetware.com/wpimages/2020/03/world-most-visited-cities-istanbul-turkey.jpg",
-      },
-      {
-        name: "Kuala Lumpur",
-        country: "Malaysia",
-        image:
-          "https://www.planetware.com/wpimages/2020/03/world-most-visited-cities-kuala-lumpur-malaysia.jpg",
-      },
-      {
-        name: "London",
-        country: "England",
-        image:
-          "https://www.planetware.com/wpimages/2020/03/world-most-visited-cities-london-england.jpg",
-      },
-      {
-        name: "Macau",
-        country: "China",
-        image:
-          "https://www.planetware.com/wpimages/2020/03/world-most-visited-cities-macau-china.jpg",
-      },
-      {
-        name: "New York",
-        country: "United States",
-        image:
-          "https://www.planetware.com/wpimages/2020/03/world-most-visited-cities-new-york-city.jpg",
-      },
-      {
-        name: "Paris",
-        country: "France",
-        image:
-          "https://www.planetware.com/wpimages/2020/03/world-most-visited-cities-paris-france.jpg",
-      },
-      {
-        name: "Tokyo",
-        country: "Japan",
-        image:
-          "https://www.planetware.com/wpimages/2020/03/world-most-visited-cities-tokyo-japan.jpg",
-      },
-      {
-        name: "Rome",
-        country: "Italy",
-        image:
-          "https://www.planetware.com/wpimages/2020/03/world-most-visited-cities-rome-italy.jpg",
-      },
-    ];
-    simulateFetch(citiesArray);
+    fetch("http://localhost:4000/api/carrousel-cities")
+      .then(res=> res.json())
+      .then(data=> 
+        setArray(data.response.carrouselCities))
+      .catch()
   }, []);
 
-  const simulateFetch = (list) => {
-    setArray(list);
-  };
+
   const handleSelect = (_, e) => {
     if (e !== undefined) {
       e.target.className.includes("next")
@@ -102,6 +30,7 @@ function Carrousel() {
   };
 
   return (
+      
     <Carousel interval={3000} onSelect={handleSelect}>
       {Array.from({ length: array.length / imagesPerSlide }).map(
         (e, mapIndex) => (

@@ -24,7 +24,7 @@ function MainNav() {
           ></img>
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
+        <Navbar.Collapse id="responsive-navbar-nav" className="toggle-nav">
           <Nav className="d-flex justify-content-center container align-items-center main-nav">
             <Link className="nav-link" to="/">
               Home

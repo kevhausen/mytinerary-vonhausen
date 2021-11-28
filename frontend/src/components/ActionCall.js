@@ -28,7 +28,7 @@ const ActionCall = () => {
         </Col>
         <Col>
           <p className="text-center text-light ">
-            📘Book your destination here
+            Book your destination here
           </p>
         </Col>
         <Col className="p-0">
