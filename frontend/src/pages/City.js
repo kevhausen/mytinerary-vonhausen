@@ -9,14 +9,16 @@ import Itineraries from "../components/Itineraries";
 export default class City extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { city: {name:"",country:"",image:"",description:"", id:0} };
+    this.state = { city: {name:"",country:"",image:"",description:"", id:""} };
   }
   componentDidMount() {
-    fetch("http://localhost:4000/api/cities/" + this.props.params.id)
+      console.log(this.props.params.id.toString())
+    fetch("http://localhost:4000/api/cities/" + this.props.params.id.toString())
       .then((res) => {
         return res.json();
       })
       .then((data) => {
+          console.log(data)
         this.setState({ city: data.response.city });
       });
   }

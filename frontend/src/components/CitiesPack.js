@@ -7,13 +7,13 @@ import MainNav from "./MainNav";
 import ErrorIcon from "../assets/error.png"
 
 function CitiesPack() {
-  const [array, setArray] = useState([{ name: "", country: "", image: "", description: "", id:"" }]);
+  const [array, setArray] = useState([{ name: "", country: "", image: "", description: "", _id:"" }]);
   const [stringFilter, setFilterString] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:4000/api/cities")
       .then((res) => res.json())
-      .then((data) => setArray(data.response.citiesArray))
+      .then((data) => setArray(data.response.cities))
       .catch();
   }, []);
   const searchRef = useRef()
@@ -71,7 +71,7 @@ function CitiesPack() {
               <Card.Title className="fw-bold">{city.name}</Card.Title>
               <Card.Text>{city.description}</Card.Text>
               {/* {city.name.split(" ").join("-").toLowerCase()}_${city.country.toLowerCase()} */}
-              <Link to={`/cities/${city.id}`}>
+              <Link to={`/cities/${city._id}`}>
                 <Button className="itinerary-button" variant="light">Check Itinerary</Button>
               </Link>
             </Card.Body>
