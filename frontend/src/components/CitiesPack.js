@@ -68,7 +68,7 @@ function CitiesPack() {
           <Card key={city.id} className="col-12 col-md-5 col-lg-5 col-xl-3 col-sm-12 p-3 m-2 bg-main-dark text-light">
             <Card.Img variant="top" src={city.image} />
             <Card.Body>
-              <Card.Title className="fw-bold">{city.name}</Card.Title>
+              <Card.Title className="fw-bold">{city.name}, {city.country}</Card.Title>
               <Card.Text>{city.description}</Card.Text>
               {/* {city.name.split(" ").join("-").toLowerCase()}_${city.country.toLowerCase()} */}
               <Link to={`/cities/${city._id}`}>
