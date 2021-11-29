@@ -15,13 +15,11 @@ export default class City extends React.Component {
     };
   }
   componentDidMount() {
-    console.log(this.props.params.id.toString());
     fetch("http://localhost:4000/api/cities/" + this.props.params.id.toString())
       .then((res) => {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         this.setState({ city: data.response.city });
       });
   }
@@ -34,26 +32,13 @@ export default class City extends React.Component {
           <MainNav />
           <Container className="d-flex flex-column align-items-center p-4 justify-content-between">
             <Container className="d-flex justify-content-around p-4 mb-4 rounded">
-              {/* <img src={city.image} alt={city.name} className="city-image" />
-              <div className="d-flex flex-column justify-content-center text-light" >
-                  <h2>{city.name}, {city.country}</h2>
-                  <p>{city.description}</p>
-              </div> */}
-              {/* <Card key={city._id} className="col-12 col-md-5 col-lg-5 col-xl-3 col-sm-12 p-3 m-2 bg-main-dark text-light">
-            <Card.Img variant="top" src={city.image} />
-            <Card.Body>
-              <Card.Title className="fw-bold">{city.name}</Card.Title>
-              <Card.Text>{city.description}</Card.Text>
-            </Card.Body>
-          </Card> */}
-              <Card key={city._id} className="bg-dark text-white">
-                <Card.Img src={city.image} alt={city.name} />
-                <Card.ImgOverlay>
-                  <Card.Title className="text-shadow fw-bold">{city.name}</Card.Title>
-                  <Card.Text className="text-shadow">
-                  {city.description}
+              <Card>
+                <Card.Img variant="top" src={city.image} />
+                <Card.Body className="bg-main">
+                  <Card.Text className="text-light">
+                    {city.name}, {city.country}
                   </Card.Text>
-                </Card.ImgOverlay>
+                </Card.Body>
               </Card>
             </Container>
             <Link to="/cities">
