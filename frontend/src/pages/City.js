@@ -4,8 +4,10 @@ import Container from "react-bootstrap/esm/Container";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Footer from "../components/Footer";
-import Itineraries from "../components/Itineraries";
+import Itineraries from "../components/city/Itineraries";
 import Card from "react-bootstrap/Card";
+import CitySection from "../components/city/CitySection";
+import ActivitiesSection from "../components/city/ActivitiesSection";
 
 export default class City extends React.Component {
   constructor(props) {
@@ -28,27 +30,9 @@ export default class City extends React.Component {
     const city = this.state.city;
     return (
       <>
-        <Container fluid className="citySection">
-          <MainNav />
-          <Container className="d-flex flex-column align-items-center p-4 justify-content-between">
-            <Container className="d-flex justify-content-around p-4 mb-4 rounded">
-              <Card>
-                <Card.Img variant="top" src={city.image} />
-                <Card.Body className="bg-main">
-                  <Card.Text className="text-light">
-                    {city.name}, {city.country}
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Container>
-            <Link to="/cities">
-              <Button className="itinerary-button btn-light btn">
-                Back to Cities
-              </Button>
-            </Link>
-          </Container>
-          <Itineraries />
-        </Container>
+        <CitySection city={city} />
+        <Itineraries />
+        
         <Footer />
       </>
     );

@@ -27,9 +27,7 @@ const ActionCall = () => {
           </h2>
         </Col>
         <Col>
-          <p className="text-center text-light ">
-            Book your destination here
-          </p>
+          <p className="text-center text-light ">Book your destination here</p>
         </Col>
         <Col className="p-0">
           <div className="d-flex justify-content-center">

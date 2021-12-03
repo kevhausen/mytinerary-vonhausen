@@ -6,12 +6,11 @@ import MainNav from "../components/MainNav";
 export default class Reservation extends React.Component {
   render() {
     return (
-        <>
-      <Container fluid className="min-vh-100 bg-info">
-        <MainNav />
-        
-      </Container>
-      <Footer />
+      <>
+        <Container fluid className="min-vh-100 bg-info">
+          <MainNav />
+        </Container>
+        <Footer />
       </>
     );
   }

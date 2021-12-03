@@ -8,7 +8,6 @@ function CarrouselPack(props) {
 
   return (
     <>
-        
       {citiesList.slice(index, index + imagesPerSlide).map((city) => (
         <Col key={city.name}>
           <Card>
@@ -21,7 +20,6 @@ function CarrouselPack(props) {
           </Card>
         </Col>
       ))}
-      
     </>
   );
 }

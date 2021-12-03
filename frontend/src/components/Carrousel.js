@@ -10,12 +10,10 @@ function Carrousel() {
 
   useEffect(() => {
     fetch("http://localhost:4000/api/carrousel-cities")
-      .then(res=> res.json())
-      .then(data=> 
-        setArray(data.response.carrouselCities))
-      .catch()
+      .then((res) => res.json())
+      .then((data) => setArray(data.response.carrouselCities))
+      .catch();
   }, []);
-
 
   const handleSelect = (_, e) => {
     if (e !== undefined) {
@@ -30,7 +28,6 @@ function Carrousel() {
   };
 
   return (
-      
     <Carousel interval={3000} onSelect={handleSelect}>
       {Array.from({ length: array.length / imagesPerSlide }).map(
         (e, mapIndex) => (

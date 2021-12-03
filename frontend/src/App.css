@@ -53,9 +53,6 @@ div a {
   width: 1.4rem;
 }
 
-.toggle-nav{
-   
-}
 .footer-container {
   background-color: var(--mainColorDark);
 }
@@ -108,7 +105,7 @@ div a {
     min-height: 70vh;
     background-image: linear-gradient(
     to bottom,
-    #67a1a5,
+    #479ba3,
     var(--mainColor)
   );
 }
@@ -124,9 +121,56 @@ div a {
   
 }
 
+.city-bg{
+    transition: .2s;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow:inset 0 0 0 2000px #122e4391;
+    min-height: 30vh; 
+}
+
+.city-bg:hover{
+    transition: .2s;
+    box-shadow:inset 0 0 0 2000px #122e4300;
+}
+
+.city-title{
+    transition: .2s;
+}
+.city-bg:hover .city-title{
+    transition: .2s;
+    background-color: #122e43c7;
+    border-radius: 4px;
+    padding: 3px;
+    box-shadow:  1px 1px 5px #122e43,
+             -1px -1px 5px #122e43;
+}
+
+
+.user-img{
+    width: 5rem;
+}
+.vh-20{
+    min-height: 20vh;
+
+}
 
 .itinerarySection{
     min-height: 30vh;
+    background-image: linear-gradient(
+    to bottom,
+    var(--mainColor),
+    #0d2a41
+  );
+}
+
+.activitySection{
+    background-image: linear-gradient(
+    to bottom,
+    var(--mainColor),
+    #0d2a41
+  );
 }
 
 
@@ -141,6 +185,59 @@ div a {
     #1e3950
   );
 }
+
+.like{
+    filter: invert(100%) sepia(0%) saturate(7447%) hue-rotate(191deg)
+    brightness(112%) contrast(116%);
+    width: 3rem;
+}
+.like:hover{
+    filter: invert(100%) sepia(0%) saturate(7447%) hue-rotate(191deg)
+    brightness(80%) contrast(116%);
+}
+.like:active{
+    animation: press 0.1s 1 linear;
+}
+
+.like-black{
+    width: 3rem;
+}
+.like:active{
+    animation: press 0.1s 1 linear;
+}
+
+.liked-container{
+    height: 3vh;
+}
+@keyframes press {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+
+
+
+
+.h20{
+    height: 10vh !important;
+}
+
+.bg-main-light{
+    background-image: linear-gradient(
+    to bottom right,
+    #2b4d68,
+    #1e3950
+  );
+}
+
+
 .itinerary-button:hover{
     background-color: var(--mainColorDark) !important;
     color: white !important;
@@ -180,6 +277,15 @@ div a {
   background-position: center;
   background-repeat: no-repeat;
   object-fit: cover;
+}
+
+.white-hover{
+    transition: .2s;
+}
+
+.white-hover:hover{
+    transition: .2s;
+    background-color: rgba(255, 255, 255, 0.199);
 }
 
 .search-tool-container {
@@ -338,6 +444,12 @@ hr.dashed {
     }
 
 
+}
+
+@media (max-width: 575px){
+    .publisher-name{
+        font-size: 1rem;
+    }
 }
 
 

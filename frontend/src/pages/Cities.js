@@ -6,7 +6,6 @@ export default class Cities extends React.Component {
   render() {
     return (
       <>
-        
         <CitiesPack />
         <Footer />
       </>

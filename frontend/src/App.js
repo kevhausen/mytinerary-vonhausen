@@ -1,17 +1,33 @@
 import './App.css';
 import Home from './pages/Home';
-import { Outlet} from "react-router-dom";
+import React from "react";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Cities from "./pages/Cities";
+import Reservation from "./pages/Reservation";
+import Contact from "./pages/Contact";
+import Account from "./pages/Account";
+import ErrorPage from "./pages/ErrorPage";
+import City from "./pages/City"
+import withRouter from "./utilities/withRouter"
 
-
-
-
+const CityDinamic = withRouter(City)
 
 function App() {
   return (
-    <div className="App">       
-       <Home />    
-       <Outlet />
-    </div>
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="reservation" element={<Reservation />} />
+      <Route path="contact" element={<Contact />} />
+      <Route path="account" element={<Account />} />
+      <Route path="cities/:id"  element={<CityDinamic />} />
+      <Route path="cities" element={<Cities />} />
+      <Route path="*" element={<ErrorPage />}/>
+    </Routes>
+  </BrowserRouter>
   );
 }
 

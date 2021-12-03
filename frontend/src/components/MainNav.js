@@ -12,8 +12,7 @@ function MainNav() {
       <Container>
         <Nav>
           <Link className="hover-white" to="/account">
-            {" "}
-            <Image className="user-icon" src={User}></Image>{" "}
+            <Image className="user-icon" src={User}></Image>
           </Link>
         </Nav>
         <Link to="/" className="nav-brands">

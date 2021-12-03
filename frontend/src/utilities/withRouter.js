@@ -8,7 +8,6 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom'
 export default function withRouter(Child){
 
     return (props) =>{
-        // el location y navigate se pueden sacar, ya que solo necesitamos el params.
         const location = useLocation();
         const navigate = useNavigate();
         const params = useParams();
