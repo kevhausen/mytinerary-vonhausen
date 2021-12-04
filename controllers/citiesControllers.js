@@ -2,47 +2,67 @@ const City = require("../models/City.js");
 
 
 const citiesControllers = {
-  getAllCities: (req, res) => {
-    City.find()
-      .then((cities) => res.json({ response: { cities } }))
-      .catch((err) => console.log(err));
+  getAllCities: async(req, res) => {
+      let cities =[]
+      try{
+          cities= await City.find()
+      }catch(error){
+          console.error(error)
+      }
+      res.json({response:{cities}})
   },
-  getCarrouselCities: (req, res) => {
-      City.find()
-      .then(cities => {
-        const carrouselCities = cities.slice(0, 12);
-        res.json({ response: { carrouselCities } });
-      })
-      .catch((err) => console.log(err))
+  getCarrouselCities: async(req, res) => {
+      let cities =[]
+      try{
+          cities = await City.find()
+
+      }catch(e){
+          console.error(e)
+      }
+      let carrouselCities = cities.slice(0,12)
+      res.json({response:{carrouselCities}})
   },
-  getCity: (req, res) => {
-    City.findOne({ _id: req.params.id })
-    .then((city) =>
-      res.json({ response: { city } })
-    )
-    .catch((err) => console.log(err))
+  getCity: async(req, res) => {
+      let city = {}
+    try{
+        city = await City.findOne({_id:req.params.id})
+
+    }catch(e){
+        console.error(e)
+    }
+    res.json({response:{city}})
   },
-  uploadCity: (req, res) => {
-    const city = new City({
-      name: req.body.name,
-      country: req.body.country,
-      image: req.body.image,
-      description: req.body.description,
-    });
-    city
-      .save()
-      .then(() => res.json({ success: true }))
-      .catch((err) => console.log(err));
+  uploadCity: async(req, res) => {
+      const city = new City({
+        name: req.body.name,
+        country: req.body.country,
+        image: req.body.image,
+        description: req.body.description,
+      });
+      try{
+          await city.save()
+      }catch(e){
+          console.error(e)
+      }
+      res.json({sucess:true})
   },
-  deleteCity: (req, res) => {
-      City.findOneAndDelete({_id:req.params.id})
-      .then(()=> res.json({success:true}))
-      .catch(err=> console.log(err))
+  deleteCity: async(req, res) => {
+      try{
+        await City.findOneAndDelete({_id:req.params.id})
+
+      }catch(e){
+          console.error(e)
+      }
+      res.json({success:true})
   },
-  modifyCity: (req, res) => {
-      City.findOneAndUpdate({_id:req.params.id},{...req.body})
-      .then( ()=>res.json({ response: true }))
-      .catch(err=> console.log(err))
+  modifyCity: async(req, res) => {
+      try{
+        await City.findOneAndUpdate({_id:req.params.id},{...req.body})
+
+      }catch(e){
+          console.error(e)
+      }
+      res.json({ response: true })
   }
 };
 

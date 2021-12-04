@@ -96,10 +96,12 @@ div a {
 .citiesSection {
   background-color: #766f778c;
   background-image: url("./assets/cities-section.jpg");
+  z-index: -2000;
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh;
 }
+
 
 .citySection{
     min-height: 70vh;

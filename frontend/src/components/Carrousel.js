@@ -8,12 +8,9 @@ import citiesActions from "../redux/actions/citiesActions.js"
 function Carrousel(props) {
   const imagesPerSlide = 4;
   let currentIndex = 0;
-  let array = props.store.cities
-  console.log('COMPONENT: abajo estaria el array de Carrousel')
-  console.log(array)
+  let array = props.store.carrouselCities
 
   useEffect(() => {
-      console.log('COMPONENTE: se ejecuta la action getCities() desde useEffect')
       props.getCities()
   }, []);
 
@@ -52,8 +49,6 @@ function Carrousel(props) {
 }
 
 const mapStateToProps = (state)=>{
-    console.log('COMPONENTE: en mapStateToProps con store:')
-    console.log(state.citiesReducer)
     return{
         store : state.citiesReducer
     }

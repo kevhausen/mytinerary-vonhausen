@@ -7,7 +7,7 @@ const citySchema = new mongoose.Schema({
     description: {type:String}
 })
 
-// este se encarga de modificar la base de datos CRUD, se usa en los controladores
+
 const City = mongoose.model('city' , citySchema)
 
 

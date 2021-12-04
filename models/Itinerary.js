@@ -6,7 +6,9 @@ const itinerarySchema = new mongoose.Schema({
     price: {type:Number, require: true},
     duration: {type:Number, require: true},
     likes: {type:Number, default:0},
-    hashtags: {type:[String], require:true}
+    hashtags: {type:[String], require:true},
+    comments:{type:[String]},
+    city:{type:String,require:true}
 })
 
 const Itinerary = mongoose.model('itinerary' , itinerarySchema)

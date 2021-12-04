@@ -1,35 +1,33 @@
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import Container from "react-bootstrap/esm/Container";
 import { Link } from "react-router-dom";
 import MainNav from "./MainNav";
 import ErrorIcon from "../assets/error.png";
+import {connect} from "react-redux"
+import citiesActions from "../redux/actions/citiesActions.js"
 
-function CitiesPack() {
-  const [array, setArray] = useState([
-    { name: "", country: "", image: "", description: "", _id: "" },
-  ]);
-  const [stringFilter, setFilterString] = useState("");
+function CitiesPack(props) {
+
+  let array = props.store.cities
+  const searchRef = useRef();
 
   useEffect(() => {
-    fetch("http://localhost:4000/api/cities")
-      .then((res) => res.json())
-      .then((data) => setArray(data.response.cities))
-      .catch();
+      props.getCities()
   }, []);
-  const searchRef = useRef();
+
   function handleFocusScroll() {
     searchRef.current.scrollIntoView({ behavior: "smooth" });
   }
   const searchCity = (e) => {
-    setFilterString(e.target.value.toLowerCase().trim());
+    props.setFilter(e.target.value.toLowerCase().trim())
     handleFocusScroll();
   };
   let filteredArray = array.filter(
     (city) =>
-      city.name.toLowerCase().startsWith(stringFilter) ||
-      city.country.toLowerCase().startsWith(stringFilter)
+      city.name.toLowerCase().startsWith(props.store.stringFilter) ||
+      city.country.toLowerCase().startsWith(props.store.stringFilter)
   );
 
   return (
@@ -104,4 +102,15 @@ function CitiesPack() {
   );
 }
 
-export default CitiesPack;
+const mapStateToProps = (state)=>{
+    return{
+        store : state.citiesReducer
+    }
+}
+
+const mapDispatchToProps = {
+    getCities : citiesActions.getAllCities,
+    setFilter : citiesActions.setFilter
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(CitiesPack);

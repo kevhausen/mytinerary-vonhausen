@@ -13,6 +13,20 @@ const citiesActions={
         }
 
 
+    },
+    getAllCities : () =>{
+        return async(dispatch) =>{
+            let response = await axios.get('http://localhost:4000/api/cities')
+            let info = response.data.response.cities
+            dispatch({type:"GET_ALL_CITIES", payload:info})
+        }
+    },
+    setFilter : (inputText) =>{
+        
+        return(dispatch) =>{
+            console.log('ACTION: esta llegando input del usuario: ' + inputText)
+            dispatch({type:"FILTER_CITIES", payload:inputText})
+        }
     }
 }
 

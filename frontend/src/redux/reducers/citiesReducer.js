@@ -1,5 +1,7 @@
 const initialState = {
-    cities : []
+    cities : [],
+    carrouselCities :[],
+    stringFilter : ''
 }
 
 
@@ -15,9 +17,21 @@ const citiesReducer = (state = initialState, action) =>{
             console.log(action.payload)
             return{
                 ...state,
-                cities : action.payload
+                carrouselCities : action.payload
             }
-            default :
+        case "GET_ALL_CITIES":
+            return{
+                ...state,
+                cities: action.payload
+
+            }
+        case "FILTER_CITIES":
+            return{
+                ...state,
+                stringFilter: action.payload
+            }
+
+        default :
             return state
     }
 }
