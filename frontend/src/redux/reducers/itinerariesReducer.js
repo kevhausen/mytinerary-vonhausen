@@ -1,16 +1,18 @@
 const initialState = {
-    
+
 }
 
-const itinerariesReducer = (state = {
-    name: '',
-    country:'',
+const itinerariesReducer = (state = [{
+   name: '',
     image: '',
-    description:''
+    price: 0,
+    duration: 0,
+    likes: 0,
+    hashtags: []
 
 
 
-}, action) =>{
+}], action) =>{
     // primero se inicializa el reducer con state por defecto (tal cual se hacia con los state normales de components.)
 
     return state

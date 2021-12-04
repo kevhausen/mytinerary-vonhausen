@@ -2,17 +2,19 @@ import Carousel from "react-bootstrap/Carousel";
 import Row from "react-bootstrap/Row";
 import { useEffect, useState } from "react";
 import CarrouselPack from "./CarrouselPack.js";
+import {connect} from "react-redux"
+import citiesActions from "../redux/actions/citiesActions.js"
 
-function Carrousel() {
-  const [array, setArray] = useState([{ name: "", country: "", image: "" }]);
+function Carrousel(props) {
   const imagesPerSlide = 4;
   let currentIndex = 0;
+  let array = props.store.cities
+  console.log('COMPONENT: abajo estaria el array de Carrousel')
+  console.log(array)
 
   useEffect(() => {
-    fetch("http://localhost:4000/api/carrousel-cities")
-      .then((res) => res.json())
-      .then((data) => setArray(data.response.carrouselCities))
-      .catch();
+      console.log('COMPONENTE: se ejecuta la action getCities() desde useEffect')
+      props.getCities()
   }, []);
 
   const handleSelect = (_, e) => {
@@ -30,7 +32,7 @@ function Carrousel() {
   return (
     <Carousel interval={3000} onSelect={handleSelect}>
       {Array.from({ length: array.length / imagesPerSlide }).map(
-        (e, mapIndex) => (
+        (_, mapIndex) => (
           <Carousel.Item key={mapIndex} className="p-2">
             <Row xs={1} sm={2} md={2} lg={4} className="g-4">
               <CarrouselPack
@@ -49,4 +51,15 @@ function Carrousel() {
   );
 }
 
-export default Carrousel;
+const mapStateToProps = (state)=>{
+    console.log('COMPONENTE: en mapStateToProps con store:')
+    console.log(state.citiesReducer)
+    return{
+        store : state.citiesReducer
+    }
+}
+
+const mapDispatchToProps = {
+    getCities : citiesActions.getCities,
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Carrousel);

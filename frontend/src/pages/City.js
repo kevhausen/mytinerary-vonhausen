@@ -10,8 +10,8 @@ import CitySection from "../components/city/CitySection";
 import ActivitiesSection from "../components/city/ActivitiesSection";
 
 export default class City extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       city: { name: "", country: "", image: "", description: "", id: "" },
     };
