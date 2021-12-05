@@ -1,21 +1,23 @@
 const initialState = {
+  itineraries: [],
+};
 
-}
+const itinerariesReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "GET_ITINERARIES_BY_CITY":
+      console.log(
+        "REDUCER: estoy en itinerariesReducer con:" +
+          action.type +
+          " y abajo esta el payload"
+      );
+      console.log(action.payload);
+      return {
+        ...state,
+        itineraries: action.payload,
+      };
+    default:
+      return state;
+  }
+};
 
-const itinerariesReducer = (state = [{
-   name: '',
-    image: '',
-    price: 0,
-    duration: 0,
-    likes: 0,
-    hashtags: []
-
-
-
-}], action) =>{
-    // primero se inicializa el reducer con state por defecto (tal cual se hacia con los state normales de components.)
-
-    return state
-}
-
-export default itinerariesReducer
+export default itinerariesReducer;

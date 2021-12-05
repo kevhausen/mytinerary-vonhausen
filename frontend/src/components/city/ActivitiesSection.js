@@ -9,11 +9,12 @@ import Gear from "../../assets/gear.png";
 function ActivitiesSection(){
     const [open, setOpen] = useState(false);
     return(
-        <Container fluid className="d-flex justify-content-center flex-column align-items-center p-1">
+        <Container fluid className="d-flex justify-content-center flex-column align-items-center p-1 activitiesSection">
           <Button
             onClick={() => setOpen(!open)}
             aria-controls="example-collapse-text"
             aria-expanded={open}
+            className="itinerary-button" variant="light"
           >
             {!open ? "View More" : "View Less"}
           </Button>

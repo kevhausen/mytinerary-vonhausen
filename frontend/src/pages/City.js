@@ -8,33 +8,37 @@ import Itineraries from "../components/city/Itineraries";
 import Card from "react-bootstrap/Card";
 import CitySection from "../components/city/CitySection";
 import ActivitiesSection from "../components/city/ActivitiesSection";
+import { connect } from "react-redux";
+import citiesActions from "../redux/actions/citiesActions.js";
 
-export default class City extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      city: { name: "", country: "", image: "", description: "", id: "" },
-    };
-  }
+class City extends React.Component {
   componentDidMount() {
-    fetch("http://localhost:4000/api/cities/" + this.props.params.id.toString())
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        this.setState({ city: data.response.city });
-      });
+      console.log('COMPONENT: SE MONTA CITY CON ID' + this.props.params.id.toString())
+      this.props.getCity(this.props.params.id.toString())
+    //   aqui tengo que hacer una funcion para obtener todos los itinerarios que tengan una ciudad con la id de params, primero voy a cargar unos itinerarios
   }
 
   render() {
-    const city = this.state.city;
+    const city = this.props.city;
+    console.log("COMPONENT CITY: tengo esta ciudad")
+    console.log(city)
     return (
       <>
         <CitySection city={city} />
-        <Itineraries />
-        
+        <Itineraries id={this.props.params.id.toString()} />
         <Footer />
       </>
     );
   }
 }
+const mapStateToProps = (state) => {
+    return {
+      city: state.citiesReducer.city,
+    };
+  };
+  
+  const mapDispatchToProps = {
+    getCity: citiesActions.getCity
+  };
+
+export default connect(mapStateToProps, mapDispatchToProps)(City);

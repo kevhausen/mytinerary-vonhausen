@@ -35,8 +35,8 @@ function MainNav() {
               Cities
             </Link>
 
-            <Link className="nav-link" to="/reservation">
-              Reservation
+            <Link className="nav-link" to="/itineraries">
+              Itineraries
             </Link>
             <Link className="nav-link" to="/contact">
               Contact

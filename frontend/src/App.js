@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Cities from "./pages/Cities";
-import Reservation from "./pages/Reservation";
+import Reservation from "./pages/Itineraries";
 import Contact from "./pages/Contact";
 import Account from "./pages/Account";
 import ErrorPage from "./pages/ErrorPage";
@@ -20,7 +20,7 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="reservation" element={<Reservation />} />
+      <Route path="itineraries" element={<Reservation />} />
       <Route path="contact" element={<Contact />} />
       <Route path="account" element={<Account />} />
       <Route path="cities/:id"  element={<CityDinamic />} />

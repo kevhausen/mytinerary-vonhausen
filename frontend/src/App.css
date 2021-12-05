@@ -149,9 +149,23 @@ div a {
              -1px -1px 5px #122e43;
 }
 
+#dolar{
+    width: 2.5rem;
+    filter: invert(58%) sepia(54%) saturate(578%) hue-rotate(42deg) brightness(93%) contrast(85%);
+    padding: .1rem;
+    transition: .2s;
+}
+
+#dolar:hover{
+    transition: .2s;
+    filter: invert(100%) sepia(1%) saturate(361%) hue-rotate(200deg) brightness(120%) contrast(100%);
+}
+
 
 .user-img{
-    width: 5rem;
+    width: 9rem;
+    height: 9rem;
+    object-fit: cover;
 }
 .vh-20{
     min-height: 20vh;
@@ -283,6 +297,7 @@ div a {
 
 .white-hover{
     transition: .2s;
+    height: 4rem;
 }
 
 .white-hover:hover{
@@ -304,6 +319,10 @@ div a {
     var(--mainColorDark),
     var(--mainColorLight)
   );
+}
+
+.activitesSection{
+    margin-top: 100px;
 }
 
 .image-title {

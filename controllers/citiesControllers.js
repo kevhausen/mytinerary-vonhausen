@@ -33,14 +33,9 @@ const citiesControllers = {
     res.json({response:{city}})
   },
   uploadCity: async(req, res) => {
-      const city = new City({
-        name: req.body.name,
-        country: req.body.country,
-        image: req.body.image,
-        description: req.body.description,
-      });
+      const {name,country,image,description} = req.body
       try{
-          await city.save()
+          await new City({name,country,image,description}).save()
       }catch(e){
           console.error(e)
       }

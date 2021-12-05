@@ -1,17 +1,22 @@
 import { useState } from "react";
 import Like from "../../assets/like.png";
+import { useEffect } from "react";
 
-function LikeComponent() {
+function LikeComponent(props) {
   const [isLiked, setLiked] = useState(false);
   const [likes, setLikes] = useState(0);
+
+  useEffect(() => {
+    setLikes(props.likes)
+  }, []);
 
   const likesHandle = () => {
     if (isLiked) {
       setLiked(false);
-      setLikes(likes - 1);
+      setLikes((props.likes));
     } else {
       setLiked(true);
-      setLikes(likes + 1);
+      setLikes((props.likes) + 1);
     }
   };
   return (

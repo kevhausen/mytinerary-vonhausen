@@ -1,34 +1,38 @@
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Container from "react-bootstrap/esm/Container";
 import { Link } from "react-router-dom";
 import MainNav from "./MainNav";
 import ErrorIcon from "../assets/error.png";
-import {connect} from "react-redux"
-import citiesActions from "../redux/actions/citiesActions.js"
+import Gear from "../assets/gear.png"
+import { connect } from "react-redux";
+import citiesActions from "../redux/actions/citiesActions.js";
 
 function CitiesPack(props) {
-
-  let array = props.store.cities
+    const [isLoad,setLoad] = useState(true)
+  let array = props.cities;
   const searchRef = useRef();
+  console.log(array)
+  console.log(isLoad)
 
   useEffect(() => {
-      props.getCities()
+    props.getCities();
   }, []);
+
+  if(array.length!==0 && isLoad===true){
+      setLoad(false)
+  }
+
+  
 
   function handleFocusScroll() {
     searchRef.current.scrollIntoView({ behavior: "smooth" });
   }
   const searchCity = (e) => {
-    props.setFilter(e.target.value.toLowerCase().trim())
+    props.setFilter(props.auxiliar, e.target.value.toLowerCase().trim());
     handleFocusScroll();
   };
-  let filteredArray = array.filter(
-    (city) =>
-      city.name.toLowerCase().startsWith(props.store.stringFilter) ||
-      city.country.toLowerCase().startsWith(props.store.stringFilter)
-  );
 
   return (
     <>
@@ -48,7 +52,7 @@ function CitiesPack(props) {
                 size="50"
                 onChange={searchCity}
                 className="form-control"
-                placeholder="Ex: Santiago"
+                placeholder="Example: Santiago"
                 aria-label="Recipient's for city search"
                 aria-describedby="button-addon2"
                 onClick={handleFocusScroll}
@@ -64,8 +68,9 @@ function CitiesPack(props) {
         fluid
         className="d-flex flex-wrap justify-content-center cities-pack-section"
       >
-        {filteredArray.length ? (
-          filteredArray.map((city) => (
+        {
+    (array.length ? (
+          array.map((city) => (
             <Card
               key={city._id}
               className="col-12 col-md-5 col-lg-5 col-xl-3 col-sm-12 p-3 m-2 bg-main-dark text-light"
@@ -87,30 +92,33 @@ function CitiesPack(props) {
         ) : (
           <Container className="d-flex justify-content-center align-items-center flex-column flex-md-row">
             <img
-              className="me-2 error-icon pos-2"
+              className= "me-2 error-icon pos-2"
+              id={isLoad && "gear"}
               width="50"
-              src={ErrorIcon}
+              src={isLoad? Gear : ErrorIcon}
               alt="error icon"
             />
             <h3 className="text-light text-center">
-              No city or country match searched word. Please try again.
+            {isLoad ?  "Loading" : "No city or country match searched word. Please try again."} 
             </h3>
           </Container>
-        )}
+        ))  
+        }
       </Container>
     </>
   );
 }
 
-const mapStateToProps = (state)=>{
-    return{
-        store : state.citiesReducer
-    }
-}
+const mapStateToProps = (state) => {
+  return {
+    cities: state.citiesReducer.cities,
+    auxiliar: state.citiesReducer.auxiliar,
+  };
+};
 
 const mapDispatchToProps = {
-    getCities : citiesActions.getAllCities,
-    setFilter : citiesActions.setFilter
-}
+  getCities: citiesActions.getAllCities,
+  setFilter: citiesActions.setFilter,
+};
 
-export default connect(mapStateToProps,mapDispatchToProps)(CitiesPack);
+export default connect(mapStateToProps, mapDispatchToProps)(CitiesPack);

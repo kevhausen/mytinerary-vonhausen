@@ -1,16 +1,11 @@
 const initialState = {
     cities : [],
     carrouselCities :[],
-    stringFilter : ''
+    auxArray:[],
+    stringFilter : '',
+    city : {}
 }
-
-
-    
-
-
-
 const citiesReducer = (state = initialState, action) =>{
-    // primero se inicializa el reducer con state por defecto (tal cual se hacia con los state normales de components.)
     switch(action.type){
         case "GET_CARROUSEL_CITIES":
             console.log('REDUCER: estoy en citiesReducer con:' + action.type + ' y abajo esta el payload')
@@ -22,13 +17,24 @@ const citiesReducer = (state = initialState, action) =>{
         case "GET_ALL_CITIES":
             return{
                 ...state,
-                cities: action.payload
+                cities: action.payload,
+                auxiliar:action.payload
 
             }
         case "FILTER_CITIES":
+            console.log('REDUCER: estoy en citiesReducer con:' + action.type + ' y abajo esta el payload')
+            console.log(action.payload)
+            const filteredCities = action.payload.array.filter(city => city.name.toLowerCase().startsWith(action.payload.inputText) || city.country.toLowerCase().startsWith(action.payload.inputText))
             return{
                 ...state,
-                stringFilter: action.payload
+                cities: filteredCities
+            }
+        case "GET_CITY":
+            console.log('REDUCER: estoy en citiesReducer con:' + action.type + ' y abajo esta el payload')
+            console.log(action.payload)
+            return{
+                ...state,
+                city: action.payload
             }
 
         default :

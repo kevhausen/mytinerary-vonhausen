@@ -4,7 +4,7 @@ const citiesControllers = require("../controllers/citiesControllers.js")
 const itinerariesControllers = require("../controllers/itinerariesControllers.js")
 
 const {getCarrouselCities,getAllCities,uploadCity,deleteCity,getCity,modifyCity} = citiesControllers
-const {getItineraries, getCityItineraries,getItineraryById,uploadItinerary,modifyItinerary,deleteItinerary} = itinerariesControllers
+const {getItineraries, getItinerariesByCityId,getItineraryById,uploadItinerary,modifyItinerary,deleteItinerary} = itinerariesControllers
 
 
 
@@ -25,9 +25,9 @@ router.route("/itineraries")
 .post(uploadItinerary)
 
 router.route("/itineraries/:city")
-.get(getCityItineraries)
+.get(getItinerariesByCityId)
 
-router.route("/itineraries/:id")
+router.route("/itinerary/:id")
 .get(getItineraryById)
 .put(modifyItinerary)
 .delete(deleteItinerary)
