@@ -1,5 +1,5 @@
-import './App.css';
-import Home from './pages/Home';
+import "./App.css";
+import Home from "./pages/Home";
 import React from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -10,24 +10,26 @@ import Reservation from "./pages/Itineraries";
 import Contact from "./pages/Contact";
 import Account from "./pages/Account";
 import ErrorPage from "./pages/ErrorPage";
-import City from "./pages/City"
-import withRouter from "./utilities/withRouter"
+import City from "./pages/City";
+import withRouter from "./utilities/withRouter";
+import About from "./pages/About";
 
-const CityDinamic = withRouter(City)
+const CityDinamic = withRouter(City);
 
 function App() {
   return (
     <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="itineraries" element={<Reservation />} />
-      <Route path="contact" element={<Contact />} />
-      <Route path="account" element={<Account />} />
-      <Route path="cities/:id"  element={<CityDinamic />} />
-      <Route path="cities" element={<Cities />} />
-      <Route path="*" element={<ErrorPage />}/>
-    </Routes>
-  </BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="itineraries" element={<Reservation />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="account" element={<Account />} />
+        <Route path="cities/:id" element={<CityDinamic />} />
+        <Route path="cities" element={<Cities />} />
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

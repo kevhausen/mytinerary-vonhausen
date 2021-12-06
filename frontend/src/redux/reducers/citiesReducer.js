@@ -9,12 +9,6 @@ const initialState = {
 const citiesReducer = (state = initialState, action) => {
   switch (action.type) {
     case "GET_CARROUSEL_CITIES":
-      console.log(
-        "REDUCER: estoy en citiesReducer con:" +
-          action.type +
-          " y abajo esta el payload"
-      );
-      console.log(action.payload);
       return {
         ...state,
         carrouselCities: action.payload.info,
@@ -28,12 +22,6 @@ const citiesReducer = (state = initialState, action) => {
         isLoading: action.payload.loading,
       };
     case "FILTER_CITIES":
-      console.log(
-        "REDUCER: estoy en citiesReducer con:" +
-          action.type +
-          " y abajo esta el payload"
-      );
-      console.log(action.payload);
       const filteredCities = action.payload.array.filter(
         (city) =>
           city.name.toLowerCase().startsWith(action.payload.inputText) ||
@@ -44,12 +32,6 @@ const citiesReducer = (state = initialState, action) => {
         cities: filteredCities,
       };
     case "GET_CITY":
-      console.log(
-        "REDUCER: estoy en citiesReducer con:" +
-          action.type +
-          " y abajo esta el payload"
-      );
-      console.log(action.payload);
       return {
         ...state,
         city: action.payload.info,

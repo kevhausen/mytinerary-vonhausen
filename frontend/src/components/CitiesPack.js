@@ -1,36 +1,26 @@
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Container from "react-bootstrap/esm/Container";
 import { Link } from "react-router-dom";
 import MainNav from "./MainNav";
-import ErrorIcon from "../assets/error.png";
-import Gear from "../assets/gear.png"
 import { connect } from "react-redux";
 import citiesActions from "../redux/actions/citiesActions.js";
 import MessageType from "./MessageType";
 import useConstructor from "../utilities/useConstructor.js";
 
 function CitiesPack(props) {
-
   let array = props.cities;
   const searchRef = useRef();
-  console.log("COMPONENT CITIESPACK: este es el array actual")
-  console.log(array)
-  console.log("COMPONENT CITIESPACK: el loading")
-  console.log(props.isLoading)
+  const { getCities } = props;
 
   useConstructor(() => {
     props.setLoad();
   });
 
   useEffect(() => {
-    props.getCities();
-  }, []);
-
-  
-
-  
+    getCities();
+  }, [getCities]);
 
   function handleFocusScroll() {
     searchRef.current.scrollIntoView({ behavior: "smooth" });
@@ -74,8 +64,7 @@ function CitiesPack(props) {
         fluid
         className="d-flex flex-wrap justify-content-center cities-pack-section"
       >
-        {
-    (array.length ? (
+        {array.length ? (
           array.map((city) => (
             <Card
               key={city._id}
@@ -96,9 +85,15 @@ function CitiesPack(props) {
             </Card>
           ))
         ) : (
-            <MessageType type={props.isLoading? "load" : "error"} message={props.isLoading? "Loading" : "No city or country match searched word. Please try again."} />
-        ))  
-        }
+          <MessageType
+            type={props.isLoading ? "load" : "error"}
+            message={
+              props.isLoading
+                ? "Loading"
+                : "No city or country match searched word. Please try again."
+            }
+          />
+        )}
       </Container>
     </>
   );
@@ -108,14 +103,14 @@ const mapStateToProps = (state) => {
   return {
     cities: state.citiesReducer.cities,
     auxiliar: state.citiesReducer.auxiliar,
-    isLoading: state.citiesReducer.isLoading
+    isLoading: state.citiesReducer.isLoading,
   };
 };
 
 const mapDispatchToProps = {
   getCities: citiesActions.getAllCities,
   setFilter: citiesActions.setFilter,
-  setLoad :citiesActions.setLoad
+  setLoad: citiesActions.setLoad,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CitiesPack);

@@ -1,11 +1,9 @@
 import Carousel from "react-bootstrap/Carousel";
 import Row from "react-bootstrap/Row";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import CarrouselPack from "./CarrouselPack.js";
 import { connect } from "react-redux";
 import citiesActions from "../redux/actions/citiesActions.js";
-import Container from "react-bootstrap/esm/Container";
-import Gear from "../assets/gear.png";
 import MessageType from "./MessageType.js";
 import useConstructor from "../utilities/useConstructor.js";
 
@@ -13,17 +11,15 @@ function Carrousel(props) {
   const imagesPerSlide = 4;
   let currentIndex = 0;
   let array = props.cities;
+  const { getCities } = props;
 
   useConstructor(() => {
     props.setLoad();
   });
-//   if (array.length !== 0 && isLoad === true) {
-//     setLoad(false);
-//   }
 
   useEffect(() => {
-    props.getCities();
-  }, []);
+    getCities();
+  }, [getCities]);
 
   const handleSelect = (_, e) => {
     if (e !== undefined) {
@@ -68,12 +64,12 @@ function Carrousel(props) {
 const mapStateToProps = (state) => {
   return {
     cities: state.citiesReducer.carrouselCities,
-    isLoading: state.citiesReducer.isLoading
+    isLoading: state.citiesReducer.isLoading,
   };
 };
 
 const mapDispatchToProps = {
   getCities: citiesActions.getCities,
-  setLoad : citiesActions.setLoad
+  setLoad: citiesActions.setLoad,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Carrousel);

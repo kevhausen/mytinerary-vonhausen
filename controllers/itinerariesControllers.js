@@ -59,17 +59,19 @@ const itinerariesControllers = {
         comments,
         city,
       }).save();
-      res.json({success:true})
+      res.json({ success: true });
     } catch (e) {
-        res.json({price_error :e.errors.price.message,duration_error :e.errors.duration.message})
-        console.error(e);
+      res.json({
+        price_error: e.errors.price.message,
+        duration_error: e.errors.duration.message,
+      });
+      console.error(e);
     }
   },
   modifyItinerary: async (req, res) => {
     try {
       await Itinerary.findOneAndUpdate({ _id: req.params.id }, { ...req.body });
       res.json({ response: true });
-      console.log(req.body)
     } catch (e) {
       console.error(e);
     }
@@ -78,11 +80,9 @@ const itinerariesControllers = {
     try {
       await Itinerary.findOneAndDelete({ _id: req.params.id });
       res.json({ success: true });
-
     } catch (e) {
       console.error(e);
     }
-    
   },
 };
 

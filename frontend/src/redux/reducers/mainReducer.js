@@ -3,7 +3,6 @@ import citiesReducer from "./citiesReducer"
 import itinerariesReducer from "./itinerariesReducer"
 
 const mainReducer = combineReducers({
-    // aqui iria itineraryReducer, activityReducer (creo)
     citiesReducer,
     itinerariesReducer
 })

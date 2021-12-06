@@ -4,24 +4,25 @@ import { useEffect } from "react";
 
 function LikeComponent(props) {
   const [isLiked, setLiked] = useState(false);
-  const [likes, setLikes] = useState(0);
+  const [likesAmount, setLikes] = useState(0);
+  const { likes } = props;
 
   useEffect(() => {
-    setLikes(props.likes)
-  }, []);
+    setLikes(likes);
+  }, [likes]);
 
   const likesHandle = () => {
     if (isLiked) {
       setLiked(false);
-      setLikes((props.likes));
+      setLikes(props.likes);
     } else {
       setLiked(true);
-      setLikes((props.likes) + 1);
+      setLikes(props.likes + 1);
     }
   };
   return (
     <>
-      <p className="m-0 text-light liked-container">
+      <p className="m-0 text-success text-shadow fw-bold liked-container">
         {isLiked ? "Liked!" : ""}
       </p>
       <img
@@ -30,7 +31,7 @@ function LikeComponent(props) {
         src={Like}
         alt="like icon"
       />
-      <p className="text-light">{likes}</p>
+      <p className="text-light">{likesAmount}</p>
     </>
   );
 }

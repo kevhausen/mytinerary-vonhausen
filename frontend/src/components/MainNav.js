@@ -5,7 +5,6 @@ import Image from "react-bootstrap/Image";
 import Logo from "../assets/logo2.png";
 import User from "../assets/user.png";
 import { Link } from "react-router-dom";
-import { NavLink } from 'react-router-dom';
 
 function MainNav() {
   return (
@@ -29,7 +28,7 @@ function MainNav() {
             <Link className="nav-link" to="/">
               Home
             </Link>
-            <Link className="nav-link" to="/">
+            <Link className="nav-link" to="/about">
               About
             </Link>
             <Link className="nav-link" to="/cities">

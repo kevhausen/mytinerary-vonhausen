@@ -1,26 +1,21 @@
 import Container from "react-bootstrap/esm/Container";
-import User from "../../assets/user-img.png";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import LikeComponent from "./Like";
 import ActivitiesSection from "./ActivitiesSection";
 import { connect } from "react-redux";
 import itinerariesActions from "../../redux/actions/itinerariesActions";
-import { useEffect, useState, useRef } from "react";
+import { useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import Dolar from "../../assets/dollar.png";
-import Gear from "../../assets/gear.png";
 import MessageType from "../MessageType";
 import useConstructor from "../../utilities/useConstructor";
-import ErrorIcon from "../../assets/error.png";
 
 function Itineraries(props) {
   useConstructor(() => {
     props.setLoad();
   });
-
-  console.log("COMPONENTE: el loading que llega del reducer" + props.isLoading);
 
   function dolarQuantity(price) {
     return Array.from({ length: price });
@@ -30,16 +25,11 @@ function Itineraries(props) {
     let stringedArray = arrayAux.toString().split(",").join(" ");
     return stringedArray;
   }
-  const { getItinerariesByCity, id, setLoad } = props;
+  const { getItinerariesByCity, cityId, setLoad } = props;
 
   useEffect(() => {
-    getItinerariesByCity(id);
-  }, [getItinerariesByCity, id, setLoad]);
-
-  console.log("COMPONENTE ITINERARIES: este es el id" + props.id);
-
-  console.log("COMPONENTE ITINERARIES: esta es la lista de itinerarios");
-  console.log(props.itineraries);
+    getItinerariesByCity(cityId);
+  }, [getItinerariesByCity, cityId, setLoad]);
 
   return (
     <Container
@@ -50,12 +40,17 @@ function Itineraries(props) {
         <MessageType type="load" message="Loading" />
       ) : props.itineraries.length ? (
         props.itineraries.map((itinerary) => (
-          <Container>
-            <Container className="bg-main-light rounded d-flex flex-column align-items-center p-5">
+          <Container key={itinerary._id} className="mb-5">
+            <Container
+              className="bg-main-light rounded d-flex flex-column align-items-center p-5 itinerary-card"
+              style={{
+                backgroundImage: `url(${itinerary.itineraryImage})`,
+              }}
+            >
               <h2 className="text-light fw-bold text-center">
                 {itinerary.itineraryName}
               </h2>
-              <p className="text-light text-center">
+              <p className="text-warning text-center">
                 {formatHashtags(itinerary.hashtags)}
               </p>
               <Container>
@@ -82,8 +77,8 @@ function Itineraries(props) {
                 <div className="white-hover m-1 d-flex col-10 col-sm-4 col-lg-4 col-xl-4 col-md-4 text-center border border-white rounded justify-content-center align-items-center flex-column">
                   <p className="text-light m-0 fw-bold">Price:</p>
                   <div>
-                    {dolarQuantity(itinerary.price).map(() => (
-                      <img src={Dolar} alt="dolar" id="dolar" />
+                    {dolarQuantity(itinerary.price).map((_, index) => (
+                      <img key={index} src={Dolar} alt="dolar" id="dolar" />
                     ))}
                   </div>
                 </div>
