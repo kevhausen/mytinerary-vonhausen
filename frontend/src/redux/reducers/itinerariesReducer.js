@@ -1,6 +1,10 @@
 const initialState = {
   itineraries: [],
+  isLoading : true,
+  loaded:false
 };
+
+console.log('STORE PRINCIPAL: ISLOADING? '+initialState.isLoading)
 
 const itinerariesReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -13,8 +17,14 @@ const itinerariesReducer = (state = initialState, action) => {
       console.log(action.payload);
       return {
         ...state,
-        itineraries: action.payload,
+        itineraries: action.payload.info,
+        isLoading : action.payload.loading
       };
+    case "SET_LOAD":
+        return{
+            ...state,
+            isLoading:action.payload
+        }
     default:
       return state;
   }

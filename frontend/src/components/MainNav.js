@@ -5,6 +5,7 @@ import Image from "react-bootstrap/Image";
 import Logo from "../assets/logo2.png";
 import User from "../assets/user.png";
 import { Link } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
 function MainNav() {
   return (

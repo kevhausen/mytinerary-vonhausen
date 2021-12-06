@@ -20,14 +20,16 @@ function ActivitiesSection(){
           </Button>
           <Collapse in={open}>
             <Container id="example-collapse-text" className="pt-1">
-              <Row>
+              <Row className="d-flex flex-column flex-lg-row">
                 <Col className="text-center bg-info p-3 m-1">
-                  <p>Activities</p>
+                  <p className="display-6">Activities</p>
                   <img src={Gear} alt="gear" id="gear" />
+                  <p className="text-light fw-bold">Under Construction</p>
                 </Col>
                 <Col className="text-center bg-warning p-3 m-1">
-                  <p>Comments</p>
+                  <p className="display-6">Comments</p>
                   <img src={Gear} alt="gear" id="gear" />
+                  <p className="text-light fw-bold">Under Construction</p>
                 </Col>
               </Row>
             </Container>

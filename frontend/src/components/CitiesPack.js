@@ -8,21 +8,27 @@ import ErrorIcon from "../assets/error.png";
 import Gear from "../assets/gear.png"
 import { connect } from "react-redux";
 import citiesActions from "../redux/actions/citiesActions.js";
+import MessageType from "./MessageType";
+import useConstructor from "../utilities/useConstructor.js";
 
 function CitiesPack(props) {
-    const [isLoad,setLoad] = useState(true)
+
   let array = props.cities;
   const searchRef = useRef();
+  console.log("COMPONENT CITIESPACK: este es el array actual")
   console.log(array)
-  console.log(isLoad)
+  console.log("COMPONENT CITIESPACK: el loading")
+  console.log(props.isLoading)
+
+  useConstructor(() => {
+    props.setLoad();
+  });
 
   useEffect(() => {
     props.getCities();
   }, []);
 
-  if(array.length!==0 && isLoad===true){
-      setLoad(false)
-  }
+  
 
   
 
@@ -90,18 +96,7 @@ function CitiesPack(props) {
             </Card>
           ))
         ) : (
-          <Container className="d-flex justify-content-center align-items-center flex-column flex-md-row">
-            <img
-              className= "me-2 error-icon pos-2"
-              id={isLoad && "gear"}
-              width="50"
-              src={isLoad? Gear : ErrorIcon}
-              alt="error icon"
-            />
-            <h3 className="text-light text-center">
-            {isLoad ?  "Loading" : "No city or country match searched word. Please try again."} 
-            </h3>
-          </Container>
+            <MessageType type={props.isLoading? "load" : "error"} message={props.isLoading? "Loading" : "No city or country match searched word. Please try again."} />
         ))  
         }
       </Container>
@@ -113,12 +108,14 @@ const mapStateToProps = (state) => {
   return {
     cities: state.citiesReducer.cities,
     auxiliar: state.citiesReducer.auxiliar,
+    isLoading: state.citiesReducer.isLoading
   };
 };
 
 const mapDispatchToProps = {
   getCities: citiesActions.getAllCities,
   setFilter: citiesActions.setFilter,
+  setLoad :citiesActions.setLoad
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CitiesPack);

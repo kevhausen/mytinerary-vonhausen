@@ -6,15 +6,20 @@ import { connect } from "react-redux";
 import citiesActions from "../redux/actions/citiesActions.js";
 import Container from "react-bootstrap/esm/Container";
 import Gear from "../assets/gear.png";
+import MessageType from "./MessageType.js";
+import useConstructor from "../utilities/useConstructor.js";
 
 function Carrousel(props) {
-  const [isLoad, setLoad] = useState(true);
   const imagesPerSlide = 4;
   let currentIndex = 0;
-  let array = props.store.carrouselCities;
-  if (array.length !== 0 && isLoad === true) {
-    setLoad(false);
-  }
+  let array = props.cities;
+
+  useConstructor(() => {
+    props.setLoad();
+  });
+//   if (array.length !== 0 && isLoad === true) {
+//     setLoad(false);
+//   }
 
   useEffect(() => {
     props.getCities();
@@ -34,18 +39,8 @@ function Carrousel(props) {
 
   return (
     <>
-      {" "}
-      {isLoad ? (
-        <Container className="d-flex justify-content-center align-items-center flex-column flex-md-row">
-          <img
-            className="me-2 error-icon pos-2"
-            id="gear"
-            width="50"
-            src={Gear}
-            alt="error icon"
-          />
-          <h3 className="text-light text-center">Loading</h3>
-        </Container>
+      {props.isLoading ? (
+        <MessageType type="load" message="Loading" />
       ) : (
         <Carousel interval={3000} onSelect={handleSelect}>
           {Array.from({ length: array.length / imagesPerSlide }).map(
@@ -72,11 +67,13 @@ function Carrousel(props) {
 
 const mapStateToProps = (state) => {
   return {
-    store: state.citiesReducer,
+    cities: state.citiesReducer.carrouselCities,
+    isLoading: state.citiesReducer.isLoading
   };
 };
 
 const mapDispatchToProps = {
   getCities: citiesActions.getCities,
+  setLoad : citiesActions.setLoad
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Carrousel);

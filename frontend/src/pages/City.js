@@ -12,6 +12,10 @@ import { connect } from "react-redux";
 import citiesActions from "../redux/actions/citiesActions.js";
 
 class City extends React.Component {
+    constructor(props){
+        super(props)
+        this.props.setLoad()       
+    }
   componentDidMount() {
       console.log('COMPONENT: SE MONTA CITY CON ID' + this.props.params.id.toString())
       this.props.getCity(this.props.params.id.toString())
@@ -24,7 +28,7 @@ class City extends React.Component {
     console.log(city)
     return (
       <>
-        <CitySection city={city} />
+        <CitySection city={city} isLoading={this.props.isLoading} />
         <Itineraries id={this.props.params.id.toString()} />
         <Footer />
       </>
@@ -34,11 +38,13 @@ class City extends React.Component {
 const mapStateToProps = (state) => {
     return {
       city: state.citiesReducer.city,
+      isLoading: state.citiesReducer.isLoading
     };
   };
   
   const mapDispatchToProps = {
-    getCity: citiesActions.getCity
+    getCity: citiesActions.getCity,
+    setLoad: citiesActions.setLoad
   };
 
 export default connect(mapStateToProps, mapDispatchToProps)(City);

@@ -253,7 +253,15 @@ div a {
   );
 }
 
+.back-button{
+    background-color:var(--mainColorDark) !important;
+    border: var(--mainColorDark) !important;
+}
 
+.back-button:hover{
+    background-color: var(--mainColorLight) !important;
+
+}
 .itinerary-button:hover{
     background-color: var(--mainColorDark) !important;
     color: white !important;
@@ -426,6 +434,10 @@ hr.dashed {
   animation-name: neon;
   animation-duration: 4s;
   animation-iteration-count: infinite;
+}
+
+.messageType{
+    min-height: 30vh;
 }
 
 #gear{

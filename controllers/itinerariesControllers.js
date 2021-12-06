@@ -5,10 +5,10 @@ const itinerariesControllers = {
     let itineraries = [];
     try {
       itineraries = await Itinerary.find().populate("city");
+      res.json({ response: { itineraries } });
     } catch (error) {
       console.error(error);
     }
-    res.json({ response: { itineraries } });
   },
   getItinerariesByCityId: async (req, res) => {
     let itineraries = [];
@@ -19,19 +19,19 @@ const itinerariesControllers = {
       filtered = itineraries.filter(
         (itinerary) => itinerary.city[0].toString() === req.params.city
       );
+      res.json({ response: { filtered } });
     } catch (e) {
       console.error(e);
     }
-    res.json({ response: { filtered } });
   },
   getItineraryById: async (req, res) => {
     let itinerary = {};
     try {
       itinerary = await Itinerary.findOne({ _id: req.params.id });
+      res.json({ response: { itinerary } });
     } catch (e) {
       console.error(e);
     }
-    res.json({ response: { itinerary } });
   },
   uploadItinerary: async (req, res) => {
     const {
@@ -59,26 +59,30 @@ const itinerariesControllers = {
         comments,
         city,
       }).save();
+      res.json({success:true})
     } catch (e) {
-      console.error(e);
+        res.json({price_error :e.errors.price.message,duration_error :e.errors.duration.message})
+        console.error(e);
     }
-    res.json({ success: true });
   },
   modifyItinerary: async (req, res) => {
     try {
       await Itinerary.findOneAndUpdate({ _id: req.params.id }, { ...req.body });
+      res.json({ response: true });
+      console.log(req.body)
     } catch (e) {
       console.error(e);
     }
-    res.json({ response: true });
   },
   deleteItinerary: async (req, res) => {
     try {
       await Itinerary.findOneAndDelete({ _id: req.params.id });
+      res.json({ success: true });
+
     } catch (e) {
       console.error(e);
     }
-    res.json({ success: true });
+    
   },
 };
 
