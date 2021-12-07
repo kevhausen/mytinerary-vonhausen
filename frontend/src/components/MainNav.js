@@ -41,6 +41,9 @@ function MainNav() {
             <Link className="nav-link" to="/contact">
               Contact
             </Link>
+            <Link className="nav-link" to="/signin">
+              Sign In
+            </Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

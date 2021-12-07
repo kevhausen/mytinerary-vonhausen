@@ -102,6 +102,35 @@ div a {
   min-height: 100vh;
 }
 
+.vh-70{
+    min-height: 70vh;
+}
+
+.singIn-card{
+    
+    
+}
+
+.form-sign{
+    border-radius: 0px 30px 30px 0px;
+    /* border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px; */
+    background-color: cadetblue;
+    box-shadow: 5px 5px 10px var(--mainColorDark);
+
+}
+.welcome-sign{
+    border-radius: 30px 0px 0px 30px;
+    background-color: cornflowerblue;
+    box-shadow: 5px 5px 10px var(--mainColorDark);
+
+}
+
+.sign-logo{
+    filter: invert(95%) sepia(100%) saturate(14%) hue-rotate(213deg) brightness(104%) contrast(104%);
+    width:15rem
+}
+
 .citySection {
   min-height: 70vh;
   background-image: linear-gradient(to bottom, #479ba3, var(--mainColor));

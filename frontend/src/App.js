@@ -13,6 +13,7 @@ import ErrorPage from "./pages/ErrorPage";
 import City from "./pages/City";
 import withRouter from "./utilities/withRouter";
 import About from "./pages/About";
+import SingIn from "./pages/SignIn";
 
 const CityDinamic = withRouter(City);
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="itineraries" element={<Reservation />} />
         <Route path="contact" element={<Contact />} />
         <Route path="account" element={<Account />} />
+        <Route path="signin" element={<SingIn />} />
         <Route path="cities/:id" element={<CityDinamic />} />
         <Route path="cities" element={<Cities />} />
         <Route path="*" element={<ErrorPage />} />
