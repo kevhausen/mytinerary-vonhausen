@@ -1,6 +1,6 @@
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Container from "react-bootstrap/esm/Container";
 import { Link } from "react-router-dom";
 import MainNav from "./MainNav";
@@ -90,7 +90,7 @@ function CitiesPack(props) {
             message={
               props.isLoading
                 ? "Loading"
-                : "No city or country match searched word. Please try again."
+                : "No city or country match the searched word. Please try again."
             }
           />
         )}

@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 function MainNav() {
   return (
-    <Navbar collapseOnSelect expand="lg" className="main-nav-container">
+    <Navbar collapseOnSelect expand="md" className="main-nav-container">
       <Container>
         <Nav>
           <Link className="hover-white" to="/account">
@@ -24,7 +24,7 @@ function MainNav() {
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav" className="toggle-nav">
-          <Nav className="d-flex justify-content-center container align-items-center main-nav">
+          <Nav className="d-flex justify-content-center container align-items-center main-nav flex-wrap">
             <Link className="nav-link" to="/">
               Home
             </Link>
@@ -35,12 +35,12 @@ function MainNav() {
               Cities
             </Link>
 
-            <Link className="nav-link" to="/itineraries">
+            {/* <Link className="nav-link" to="/itineraries">
               Itineraries
             </Link>
             <Link className="nav-link" to="/contact">
               Contact
-            </Link>
+            </Link> */}
             <Link className="nav-link" to="/signin">
               Sign In
             </Link>

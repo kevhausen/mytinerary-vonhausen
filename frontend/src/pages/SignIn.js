@@ -7,7 +7,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Mytinerary from "../assets/mytinerary-cn.svg";
 import User from "../assets/user.png";
-import Logo from "../assets/logo2.png"
+import Logo from "../assets/logo2.png";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -46,19 +46,40 @@ class SingIn extends React.Component {
   render() {
     return (
       <>
-        <Container fluid className="m-0 p-0 citySection">
+        <Container
+          fluid
+          className="m-0 p-0 citySection d-flex flex-column justify-content-center"
+        >
           <MainNav />
-          <Container className="singIn-card">
-            <Row className="vh-70 p-5">
-              <Col sm={4} className="welcome-sign">
-                <p>Welcome Back!</p>
-                <img width="500" src={Mytinerary} alt="mytinerary concept" />
-                <p>Don't have an account? Sign Up</p>
+          <Container className="signIn-card">
+            <Row className="vh-70 p-5 d-flex flex-column-reverse flex-lg-row">
+              <Col
+                sm={12}
+                md={12}
+                lg={4}
+                xl={4}
+                xxl={4}
+                className="welcome-sign d-flex flex-column align-items-center justify-content-center p-1 p-xxl-5"
+              >
+                <p className="text-white display-6">Welcome Back!</p>
+                <img
+                  className="sign-mytinerary"
+                  src={Mytinerary}
+                  alt="mytinerary concept"
+                />
+                <p className="text-white">Don't have an account? Sign Up</p>
               </Col>
-              <Col sm={8} className="form-sign">
+              <Col
+                sm={12}
+                md={12}
+                lg={8}
+                xl={8}
+                xxl={8}
+                className="form-sign d-flex flex-column justify-content-center align-items-center p-2 p-md-5 p-lg-5 p-xxl-5"
+              >
                 <img className="sign-logo" src={Logo} alt="user" />
-                <h2>Sign In to MyTinerary</h2>
-                <Form onSubmit={this.handleSubmit}>
+                <h2 className="text-white fw-bold text-center">Sign In to MyTinerary</h2>
+                <Form onSubmit={this.handleSubmit} className="w-100">
                   <FloatingLabel
                     controlId="floatingInput"
                     label="Email address"
@@ -78,7 +99,7 @@ class SingIn extends React.Component {
                       aria-describedby="passwordHelpBlock"
                       onChange={(e) => this.handleChange(e)}
                     />
-                    <div className="d-flex justify-content-between">
+                    <div className="d-flex justify-content-between flex-column flex-sm-row">
                       <div>
                         <input
                           onClick={(e) => {
@@ -100,7 +121,10 @@ class SingIn extends React.Component {
                   </FloatingLabel>
                   <input type="submit" value="Submit"></input>
                 </Form>
+                <p>or sign in with Google</p>
+                <button>Google</button>
               </Col>
+              <Col className="mock-container"></Col>
             </Row>
           </Container>
         </Container>

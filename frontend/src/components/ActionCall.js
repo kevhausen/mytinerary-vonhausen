@@ -5,11 +5,11 @@ import Col from "react-bootstrap/Col";
 
 const ActionCall = () => {
   return (
-    <div className="d-flex action-call-container justify-content-between p-3 flex-column">
-      <Container className="action-call d-flex col-10 justify-content-center col-lg-9 col-md-9 col-xl-9 col-sm-9 ">
+    <div className="d-flex action-call-container p-3 flex-column">
+      <Container className="action-call d-flex col-10 justify-content-center align-content-center col-lg-9 col-md-9 col-xl-9 col-sm-9 ">
         <div className="d-flex flex-column align-items-center hero-mytinerary mb-4">
           <img src={Ballon} alt="Ballon Logo" className="ballon" />
-          <h2 className="text-light">MyTinerary</h2>
+          <h2 className="text-light title-hero">MyTinerary</h2>
           <figure className="text-center align-self-center">
             <blockquote className="blockquote">
               <p className="display-6 text-info">Find your perfect trip!</p>

@@ -8,9 +8,9 @@ export default class About extends React.Component {
   render() {
     return (
       <>
-        <Container fluid className="min-vh-100 bg-warning">
+        <Container fluid className="min-vh-100 bg-warning d-flex flex-md-column">
           <MainNav />
-          <MessageType type="load" message="Coming Soon..."/>
+          <MessageType className="about-container" type="load" message="Coming Soon..."/>
         </Container>
         <Footer />
       </>
