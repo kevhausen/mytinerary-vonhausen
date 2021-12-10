@@ -2,16 +2,13 @@ import React from "react";
 import Container from "react-bootstrap/esm/Container";
 import Footer from "../components/Footer";
 import MainNav from "../components/MainNav";
-import MessageType from "../components/MessageType";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Mytinerary from "../assets/mytinerary-cn.svg";
-import User from "../assets/user.png";
 import Logo from "../assets/logo2.png";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import Button from "react-bootstrap/Button";
+
 
 class SingIn extends React.Component {
   constructor(props) {

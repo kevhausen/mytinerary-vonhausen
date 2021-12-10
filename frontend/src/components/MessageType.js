@@ -10,7 +10,7 @@ function MessageType(props) {
     >
       <img
         className="me-2 error-icon pos-2"
-        id={props.type.includes("load") && "gear"}
+        id={props.type.includes("load")? "gear" : ''}
         width="50"
         src={props.type.includes("load") ? Gear : ErrorIcon}
         alt="error icon"

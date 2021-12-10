@@ -1,26 +1,21 @@
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Container from "react-bootstrap/esm/Container";
 import { Link } from "react-router-dom";
 import MainNav from "./MainNav";
 import { connect } from "react-redux";
 import citiesActions from "../redux/actions/citiesActions.js";
 import MessageType from "./MessageType";
-import useConstructor from "../utilities/useConstructor.js";
 
 function CitiesPack(props) {
-  let array = props.cities;
   const searchRef = useRef();
-  const { getCities } = props;
-
-  useConstructor(() => {
-    props.setLoad();
-  });
+  const { getCities, setLoad } = props;
 
   useEffect(() => {
+    setLoad();
     getCities();
-  }, [getCities]);
+  }, [getCities, setLoad]);
 
   function handleFocusScroll() {
     searchRef.current.scrollIntoView({ behavior: "smooth" });
@@ -64,8 +59,8 @@ function CitiesPack(props) {
         fluid
         className="d-flex flex-wrap justify-content-center cities-pack-section"
       >
-        {array.length ? (
-          array.map((city) => (
+        {props.cities.length ? (
+          props.cities.map((city) => (
             <Card
               key={city._id}
               className="col-12 col-md-5 col-lg-5 col-xl-3 col-sm-12 p-3 m-2 bg-main-dark text-light"

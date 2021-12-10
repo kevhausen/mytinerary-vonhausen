@@ -9,10 +9,14 @@ class City extends React.Component {
   constructor(props) {
     super(props);
     this.props.setLoad();
+    
   }
   componentDidMount() {
+    
     this.props.getCity(this.props.params.id.toString());
   }
+
+
 
   render() {
     const city = this.props.city;

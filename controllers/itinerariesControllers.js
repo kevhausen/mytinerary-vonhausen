@@ -15,10 +15,10 @@ const itinerariesControllers = {
     let filtered = [];
     try {
       itineraries = await Itinerary.find();
-      console.log(req.params.city);
       filtered = itineraries.filter(
         (itinerary) => itinerary.city[0].toString() === req.params.city
       );
+
       res.json({ response: { filtered } });
     } catch (e) {
       console.error(e);

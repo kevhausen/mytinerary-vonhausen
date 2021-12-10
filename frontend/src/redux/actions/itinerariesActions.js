@@ -2,6 +2,7 @@ import axios from "axios";
 
 const itinerariesActions = {
   getItinerariesByCity: (id) => {
+     
     return async (dispatch) => {
       let res = await axios.get("http://localhost:4000/api/itineraries/" + id);
       let info = res.data.response.filtered;

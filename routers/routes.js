@@ -36,4 +36,11 @@ router
   .put(modifyItinerary)
   .delete(deleteItinerary);
 
+// router.route('/auth/signUp')
+// .post(validator, authControllers.signUpUser)
+// .get(authControllers.readUsers)
+
+// router.route('/auth/signIn')
+// .post(validator, authControllers.signInUser)
+
 module.exports = router;
