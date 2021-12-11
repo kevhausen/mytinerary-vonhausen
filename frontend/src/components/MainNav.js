@@ -5,15 +5,22 @@ import Image from "react-bootstrap/Image";
 import Logo from "../assets/logo2.png";
 import User from "../assets/user.png";
 import { Link } from "react-router-dom";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
 
 function MainNav() {
+  let imagenUsuario = <Image className="user-icon" src={User}></Image>;
   return (
     <Navbar collapseOnSelect expand="md" className="main-nav-container">
       <Container>
         <Nav>
-          <Link className="hover-white" to="/account">
-            <Image className="user-icon" src={User}></Image>
-          </Link>
+          <DropdownButton id="dropdown-basic-button" title={imagenUsuario}>
+            <Link className="hover-white" to="/account">
+              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+            </Link>
+            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+          </DropdownButton>
         </Nav>
         <Link to="/" className="nav-brands">
           <img
@@ -34,13 +41,6 @@ function MainNav() {
             <Link className="nav-link" to="/cities">
               Cities
             </Link>
-
-            {/* <Link className="nav-link" to="/itineraries">
-              Itineraries
-            </Link>
-            <Link className="nav-link" to="/contact">
-              Contact
-            </Link> */}
             <Link className="nav-link" to="/signin">
               Sign In
             </Link>

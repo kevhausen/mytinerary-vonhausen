@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const citiesControllers = require("../controllers/citiesControllers.js");
 const itinerariesControllers = require("../controllers/itinerariesControllers.js");
+const authControllers = require("../controllers/authControllers.js");
 
 const {
   getCarrouselCities,
@@ -19,6 +20,8 @@ const {
   modifyItinerary,
   deleteItinerary,
 } = itinerariesControllers;
+
+const { getCountries, uploadCountries } = authControllers;
 
 router.route("/carrousel-cities").get(getCarrouselCities);
 
@@ -42,5 +45,7 @@ router
 
 // router.route('/auth/signIn')
 // .post(validator, authControllers.signInUser)
+
+router.route("/countries").get(getCountries).post(uploadCountries);
 
 module.exports = router;

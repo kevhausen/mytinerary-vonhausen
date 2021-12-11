@@ -21,7 +21,7 @@ class SingIn extends React.Component {
   }
   handleChange = (event) => {
     this.setState({
-      [event.target.placeholder.toLowerCase().trim()]: event.target.value,
+      [event.target.name]: event.target.value
     });
   };
   handleSubmit = (event) => {
@@ -87,6 +87,7 @@ class SingIn extends React.Component {
                       type="email"
                       placeholder="Email"
                       onChange={(e) => this.handleChange(e)}
+                      name="email"
                     />
                   </FloatingLabel>
                   <FloatingLabel controlId="floatingPassword" label="Password">
@@ -95,6 +96,7 @@ class SingIn extends React.Component {
                       placeholder="Password"
                       aria-describedby="passwordHelpBlock"
                       onChange={(e) => this.handleChange(e)}
+                      name="password"
                     />
                     <div className="d-flex justify-content-between flex-column flex-sm-row">
                       <div>
