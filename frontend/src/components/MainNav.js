@@ -15,11 +15,16 @@ function MainNav() {
       <Container>
         <Nav>
           <DropdownButton id="dropdown-basic-button" title={imagenUsuario}>
-            <Link className="hover-white" to="/account">
-              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+            <Link  to="/signup">
+              <Dropdown.Item href="#/action-1">Sign Up</Dropdown.Item>
             </Link>
-            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+            {/* que se muestren estos dos cuando este logeado */}
+            <Link  to="/account">
+            <Dropdown.Item href="#/action-2">Log Out</Dropdown.Item>
+            </Link>
+            <Link to="/account">
+            <Dropdown.Item href="#/action-2">My Account</Dropdown.Item>
+            </Link>
           </DropdownButton>
         </Nav>
         <Link to="/" className="nav-brands">

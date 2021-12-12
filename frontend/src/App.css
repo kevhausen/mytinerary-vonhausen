@@ -116,8 +116,35 @@ div a {
     border-radius: 0px 0px 0px 0px;
     /* border-top-right-radius: 30px;
     border-bottom-right-radius: 30px; */
-    background-color: cadetblue;
+    background-color: var(--mainColor);
     box-shadow: 5px 5px 10px var(--mainColorDark);
+}
+#dropdown-basic-button{
+    background-color: #122e4300;
+    border-color: rgba(0, 0, 255, 0);
+}
+#dropdown-basic-button:focus{
+    border-color: rgba(137, 43, 226, 0);
+}
+.btn-check:active + .btn-primary:focus, .btn-check:checked + .btn-primary:focus, .btn-primary.active:focus, .btn-primary:active:focus, .show > .btn-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 .25rem #39848f00 !important;
+}
+.btn-check:focus + .btn-primary, .btn-primary:focus {
+    color: black;
+    background-color: #00000000 !important;
+    border-color: #00010200 !important;
+    box-shadow: 0 0 0 .25rem rgba(0, 0, 0, 0) !important;
+}
+.btn-check:focus + .btn, .btn:focus {
+    outline: 0 !important;
+    box-shadow: 0 0 0 0 rgba(13, 109, 253, 0) !important;
+}
+
+.dropdown-menu{
+    background-color: transparent !important;
+}
+.dropdown-item:hover{
+    background-color: #091d2c!important;
 }
 
 .submit-button{
@@ -132,7 +159,8 @@ div a {
 
 .submit-button:hover{
     transition: .2s;
-    background-color: var(--mainColor);
+    background-color:white;
+    color: var(--mainColor);
 }
 
 .submit-button:active{
@@ -141,13 +169,34 @@ div a {
 
 .welcome-sign{
     border-radius: 0px 0px 0px 0px;
-    background-color: cornflowerblue;
+    background-color:#005377;
     box-shadow: 5px 5px 10px var(--mainColorDark);
 }
 
 .sign-logo{
     filter: invert(95%) sepia(100%) saturate(14%) hue-rotate(213deg) brightness(104%) contrast(104%);
     width:15rem
+}
+
+.sign-up-icon{
+    width: 4rem;
+    height: 4rem;
+
+}
+.sign-icon-card{
+    background-color: var(--mainColor);
+    box-shadow: 5px 5px 3px var(--mainColorDark);
+    margin-bottom: 20px;
+    transition: .2s;
+}
+.sign-icon-card:hover{
+    transition: .2s;
+    box-shadow: inset 5px 5px 7px var(--mainColorDark),
+            inset -5px -5px 7px var(--mainColorLight);
+}
+
+.text-main{
+    color: var(--mainColor);
 }
 
 .citySection {
@@ -335,7 +384,7 @@ div a {
   background: url("./assets/about-us.jpg");
   background-position: center;
   background-repeat: no-repeat;
-  object-fit: cover;
+  object-fit: fill;
 }
 .sign-mytinerary{
     width: 100%;
@@ -474,6 +523,9 @@ hr.dashed {
   animation-duration: 4s;
   animation-iteration-count: infinite;
 }
+.navbar-nav .dropdown-menu {
+    position: absolute !important;
+}
 
 .messageType {
   min-height: 28vh;
@@ -537,7 +589,6 @@ hr.dashed {
 @media (max-width: 991px){
     .form-sign{
         border-radius: 0px;
-        background-color: lightcoral;
 
     }
     .welcome-sign{
@@ -552,6 +603,9 @@ hr.dashed {
 }
 
 @media (max-width: 767px){
+    .sign-icon-text{
+        font-size: .8rem;
+    }
     .main-nav-container{
         position: absolute !important;
         top: 0 !important;

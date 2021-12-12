@@ -8,7 +8,7 @@ import Mytinerary from "../assets/mytinerary-cn.svg";
 import Logo from "../assets/logo2.png";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
-
+import { Link } from "react-router-dom";
 
 class SingIn extends React.Component {
   constructor(props) {
@@ -17,13 +17,16 @@ class SingIn extends React.Component {
       hidePass: true,
       email: "",
       password: "",
+      validated: false,
+      isValid:false
     };
   }
   handleChange = (event) => {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   };
+
   handleSubmit = (event) => {
     let formParams = {
       email: this.state.email,
@@ -31,6 +34,15 @@ class SingIn extends React.Component {
     };
     console.log(formParams);
     event.preventDefault();
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.stopPropagation();
+      this.setState({ validated: false });
+    }else{
+        this.setState({isValid:true})
+    }
+
+    this.setState({ validated: true });
   };
   togglePassword = (e) => {
     const checked = e.target.checked;
@@ -41,6 +53,8 @@ class SingIn extends React.Component {
     }
   };
   render() {
+      console.log("la form es valida?")
+    console.log(this.state.isValid);
     return (
       <>
         <Container
@@ -58,13 +72,21 @@ class SingIn extends React.Component {
                 xxl={4}
                 className="welcome-sign d-flex flex-column align-items-center justify-content-center p-1 p-xxl-5"
               >
-                <p className="text-white display-6">Welcome Back!</p>
+                <p className="text-white display-6 fw-bold text-center">
+                  Welcome Back!
+                </p>
                 <img
                   className="sign-mytinerary"
                   src={Mytinerary}
                   alt="mytinerary concept"
                 />
-                <p className="text-white">Don't have an account? Sign Up</p>
+                <p className="text-white">
+                  Don't have an account?{" "}
+                  <Link to="/signup">
+                    {" "}
+                    <strong>Sign Up</strong>
+                  </Link>
+                </p>
               </Col>
               <Col
                 sm={12}
@@ -75,8 +97,15 @@ class SingIn extends React.Component {
                 className="form-sign d-flex flex-column justify-content-center align-items-center p-2 p-md-5 p-lg-5 p-xxl-5"
               >
                 <img className="sign-logo" src={Logo} alt="user" />
-                <h2 className="text-white fw-bold text-center">Sign In to MyTinerary</h2>
-                <Form onSubmit={this.handleSubmit} className="w-100">
+                <h2 className="text-white fw-bold text-center">
+                  Sign In to MyTinerary
+                </h2>
+                <Form
+                  onSubmit={this.handleSubmit}
+                  className="w-100"
+                  noValidate
+                  validated={this.state.validated}
+                >
                   <FloatingLabel
                     controlId="floatingInput"
                     label="Email address"
@@ -88,7 +117,11 @@ class SingIn extends React.Component {
                       placeholder="Email"
                       onChange={(e) => this.handleChange(e)}
                       name="email"
+                      required
                     />
+                    <Form.Control.Feedback type="invalid">
+                      Please provide a valid email.
+                    </Form.Control.Feedback>
                   </FloatingLabel>
                   <FloatingLabel controlId="floatingPassword" label="Password">
                     <Form.Control
@@ -97,6 +130,7 @@ class SingIn extends React.Component {
                       aria-describedby="passwordHelpBlock"
                       onChange={(e) => this.handleChange(e)}
                       name="password"
+                      required
                     />
                     <div className="d-flex justify-content-between flex-column flex-sm-row">
                       <div>
@@ -113,14 +147,23 @@ class SingIn extends React.Component {
                           Show Password
                         </label>
                       </div>
-                      <Form.Text id="passwordHelpBlock" muted>
+                      <Form.Text id="passwordHelpBlock" className="text-white">
                         Forgot your password?
                       </Form.Text>
                     </div>
+                    <Form.Control.Feedback type="invalid">
+                      Please provide a password.
+                    </Form.Control.Feedback>
                   </FloatingLabel>
-                  <input type="submit" value="Submit"></input>
+                  <div className="d-flex justify-content-center mb-3 mt-4">
+                    <input
+                      type="submit"
+                      value="SIGN IN"
+                      className="submit-button"
+                    ></input>
+                  </div>
                 </Form>
-                <p>or sign in with Google</p>
+                <p className="text-white">or sign in with Google</p>
                 <button>Google</button>
               </Col>
               <Col className="mock-container"></Col>
