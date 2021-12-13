@@ -16,6 +16,8 @@ import Profile from "../assets/sign_up_icons/profile.png";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
+import { Navigate } from 'react-router-dom';
+
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -27,10 +29,21 @@ class SignUp extends React.Component {
       email: "",
       password: "",
       image: "",
-      country: "",
+      country: "Argentina",
       validated: false,
-      isValid: false
+      isValid: false,
     };
+  }
+
+  resetValues(){
+      this.setState({
+        name: "",
+        lastName: "",
+        email: "",
+        password: "",
+        image: "",
+        country: "Argentina"
+      })
   }
 
   componentDidMount() {
@@ -43,23 +56,30 @@ class SignUp extends React.Component {
     });
   };
   handleSubmit = (event) => {
-    let formParams = {
-      name: this.state.name,
-      lastName: this.state.lastName,
-      email: this.state.email,
-      password: this.state.password,
-      image: this.state.image,
-      country: this.state.country,
+      const {name,lastName,email,password,image,country} = this.state
+    let user = {
+      name,
+      lastName,
+      email,
+      password,
+      image,
+      country,
     };
-    console.log(formParams);
+    
     event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.stopPropagation();
+      this.setState({isValid:false})
     }else{
         this.setState({isValid:true})
+        console.log(user);
+        this.props.saveUser(user)
+        this.resetValues()
+        // se despacha el usuario
     }
     this.setState({ validated: true });
+    
   };
 
   togglePassword = (e) => {
@@ -71,9 +91,37 @@ class SignUp extends React.Component {
     }
   };
 
+  getError = (path)=>{
+      if(this.props.error!==null){
+          if(this.props.error.length>0){
+
+              let pathErrors = path === 'password'? this.props.error.filter(e=> e.path[0] === path || e.path.length===0 ) : this.props.error.filter(e=> e.path[0] === path)
+              console.log('este es el pathErrors')
+              console.log(pathErrors)
+              if(pathErrors.length>0){
+                  console.log('se encontraron errores para ' + path)
+    
+                  return pathErrors[0].message
+              }else{
+                  console.log('no hay errores en ' +path)
+                  return null
+              }
+          }
+      }  
+  }
+
   render() {
       console.log("el form es valido?")
       console.log(this.state.isValid)
+      console.log("estos son los store principal (1. error, 2.success, 3.user)")
+      console.log(this.props.error)
+      console.log(this.props.success)
+      console.log(this.props.user)
+      console.log(this.getError('lastName'))
+      if(this.props.success){
+        return <Navigate to="/" />
+        // se redirecciona y se pone el nombre del weon arribita. (se demora un poco en redireccionar ver eso)
+      }
     return (
       <>
         <Container
@@ -111,12 +159,14 @@ class SignUp extends React.Component {
                         aria-label="Text input with checkbox"
                         type="text"
                         placeholder="Name"
+                        value={this.state.name}
                         onChange={(e) => this.handleChange(e)}
                         name="name"
                         autoComplete="off"
                         required
                       />
                       <Form.Control.Feedback type="invalid">
+                          <p>{this.getError('name')}</p>
                         Please provide your name.
                       </Form.Control.Feedback>
                     </FloatingLabel>
@@ -129,6 +179,7 @@ class SignUp extends React.Component {
                         aria-label="Text input with checkbox"
                         type="text"
                         placeholder="Last Name"
+                        value={this.state.lastName}
                         onChange={(e) => this.handleChange(e)}
                         name="lastName"
                         autoComplete="off"
@@ -136,6 +187,7 @@ class SignUp extends React.Component {
                       />
                       <Form.Control.Feedback type="invalid">
                         Please provide your last name.
+                        <p>{this.getError('lastName')}</p>
                       </Form.Control.Feedback>
                     </FloatingLabel>
                   </div>
@@ -148,6 +200,7 @@ class SignUp extends React.Component {
                       aria-label="Text input with checkbox"
                       type="email"
                       placeholder="Email"
+                      value={this.state.email}
                       onChange={(e) => this.handleChange(e)}
                       name="email"
                       autoComplete="off"
@@ -155,12 +208,14 @@ class SignUp extends React.Component {
                     />
                     <Form.Control.Feedback type="invalid">
                       Please provide a valid email address.
+                      <p>{this.getError('email')}</p>
                     </Form.Control.Feedback>
                   </FloatingLabel>
                   <FloatingLabel controlId="floatingPassword" label="Password">
                     <Form.Control
                       type={this.state.hidePass ? "password" : "pass"}
                       placeholder="Password"
+                      value={this.state.password}
                       aria-describedby="passwordHelpBlock"
                       onChange={(e) => this.handleChange(e)}
                       name="password"
@@ -185,6 +240,7 @@ class SignUp extends React.Component {
                     </div>
                     <Form.Control.Feedback type="invalid">
                       Please provide a valid password.
+                      <p>{this.getError('password')}</p>
                     </Form.Control.Feedback>
                   </FloatingLabel>
                   <FloatingLabel
@@ -198,6 +254,7 @@ class SignUp extends React.Component {
                       placeholder="Image URL"
                       onChange={(e) => this.handleChange(e)}
                       name="image"
+                      value={this.state.image}
                       autoComplete="off"
                       required
                     />
@@ -211,14 +268,16 @@ class SignUp extends React.Component {
                       required
                       aria-label="Floating label select example"
                       name="country"
+                      type="text"
+                      value={this.state.country}
                       onChange={(e) => this.handleChange(e)}
                     >
                       {this.props.countries.length ? (
                         ""
                       ) : (
-                        <option>Loading...</option>
+                        <option value="Argentina">Loading...</option>
                       )}
-                      {this.props.countries.map((country) => (
+                      {this.props.countries.sort((a,b)=>a.name.localeCompare(b.name)).map((country) => (
                         <option key={country.name} value={country.name}>
                           {country.name}
                         </option>
@@ -293,11 +352,15 @@ class SignUp extends React.Component {
 const mapStateToProps = (state) => {
   return {
     countries: state.authReducer.countries,
+    user:state.authReducer.user,
+    success:state.authReducer.success,
+    error:state.authReducer.error
   };
 };
 
 const mapDispatchToProps = {
   getCountries: authActions.getCountries,
+  saveUser: authActions.saveUser
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

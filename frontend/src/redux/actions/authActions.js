@@ -8,6 +8,15 @@ const authActions = {
 
         }
 
+    },
+    saveUser :(user)=>{
+        return async(dispatch)=>{
+            console.log('estoy en ACTION saveUser')
+            console.log(user)
+            let response = await axios.post("http://localhost:4000/api/auth/signup",user)
+            console.log(response.data)
+            dispatch({type:"SAVE_USER", payload: response.data})
+        }
     }
 }
 
