@@ -38,7 +38,7 @@ function App(props) {
         <Route path="signup" element={<SignUp />} />
         <Route path="cities/:id" element={<CityDinamic />} />
         <Route path="cities" element={<Cities />} />
-        <Route path="*" element={<Home />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
   );

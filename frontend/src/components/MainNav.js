@@ -9,14 +9,8 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { connect } from "react-redux";
 import authActions from "../redux/actions/authActions";
-import { useEffect } from "react";
 
 function MainNav(props) {
-  const { authUser } = props;
-  useEffect(() => {
-    authUser();
-  }, [authUser]);
-
   let imagenUsuario = (
     <Image
       className="user-icon"
@@ -29,13 +23,13 @@ function MainNav(props) {
         <Nav>
           <DropdownButton id="dropdown-basic-button" title={imagenUsuario}>
             {props.user ? (
-              <Dropdown.Item href="#/action-2" onClick={() => props.logOut()}>
+              <Dropdown.Item onClick={() => props.logOut()}>
                 Log Out
               </Dropdown.Item>
             ) : (
-              <Link to="/signup">
-                <Dropdown.Item href="#/action-1">Sign Up</Dropdown.Item>
-              </Link>
+              <Dropdown.Item as={Link} to="/signup">
+                Sign Up
+              </Dropdown.Item>
             )}
           </DropdownButton>
         </Nav>
@@ -83,7 +77,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  authUser: authActions.authUser,
   logOut: authActions.logOut,
 };
 

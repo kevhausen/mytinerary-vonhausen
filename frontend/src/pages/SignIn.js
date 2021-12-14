@@ -238,13 +238,10 @@ class SignIn extends React.Component {
                               <Form.Control.Feedback type="invalid">
                                 Please select your country.
                               </Form.Control.Feedback>
-                            </FloatingLabel>{" "}
+                            </FloatingLabel>
                           </>
                         ) : (
-                          <p>
-                            Please save your email and password somewhere
-                            safe.😉
-                          </p>
+                          <p>Enjoy your stay.😉</p>
                         )}
                       </Modal.Body>
                       <Modal.Footer>
@@ -349,7 +346,7 @@ class SignIn extends React.Component {
                   <p className="text-white">or sign in with Google</p>
                   <GoogleLogin
                     clientId="190201580680-u46pho0n2vjalcan540tm22oan4vhc0v.apps.googleusercontent.com"
-                    buttonText="Login"
+                    buttonText="Sign in with Google"
                     onSuccess={this.responseGoogle}
                     onFailure={this.responseGoogle}
                     cookiePolicy={"single_host_origin"}

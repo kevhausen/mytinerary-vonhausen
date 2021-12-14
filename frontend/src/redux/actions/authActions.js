@@ -55,6 +55,7 @@ const authActions = {
   logOut: () => {
     return (dispatch) => {
       localStorage.clear();
+      alert("Logging out...")
       dispatch({ type: "LOG_OUT", payload: {} });
     };
   },
