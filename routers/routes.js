@@ -23,7 +23,7 @@ const {
   deleteItinerary,
 } = itinerariesControllers;
 
-const { getCountries, uploadCountries, saveUser, getUsers, signIn , modifyUser} = authControllers;
+const { getCountries, uploadCountries, saveUser, getUsers, signIn , modifyUser, authUser} = authControllers;
 
 router.route("/carrousel-cities").get(getCarrouselCities);
 
@@ -49,6 +49,8 @@ router
 // .post(validator, authControllers.signInUser)
 router.route("/auth/signup").get(getUsers).post(validator,saveUser).put(modifyUser)
 router.route("/auth/signin").post(signIn)
+
+router.route("/auth/user").get(passport.authenticate('jwt',{session:false}), authUser)
 
 router.route("/countries").get(getCountries).post(uploadCountries);
 

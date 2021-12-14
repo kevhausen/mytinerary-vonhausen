@@ -7,24 +7,36 @@ import User from "../assets/user.png";
 import { Link } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import { connect } from "react-redux";
+import authActions from "../redux/actions/authActions";
+import { useEffect } from "react";
 
-function MainNav() {
-  let imagenUsuario = <Image className="user-icon" src={User}></Image>;
+function MainNav(props) {
+  const { authUser } = props;
+  useEffect(() => {
+    authUser();
+  }, [authUser]);
+
+  let imagenUsuario = (
+    <Image
+      className="user-icon"
+      src={props.user ? props.user.image : User}
+    ></Image>
+  );
   return (
     <Navbar collapseOnSelect expand="md" className="main-nav-container">
       <Container>
         <Nav>
           <DropdownButton id="dropdown-basic-button" title={imagenUsuario}>
-            <Link  to="/signup">
-              <Dropdown.Item href="#/action-1">Sign Up</Dropdown.Item>
-            </Link>
-            {/* que se muestren estos dos cuando este logeado */}
-            <Link  to="/account">
-            <Dropdown.Item href="#/action-2">Log Out</Dropdown.Item>
-            </Link>
-            <Link to="/account">
-            <Dropdown.Item href="#/action-2">My Account</Dropdown.Item>
-            </Link>
+            {props.user ? (
+              <Dropdown.Item href="#/action-2" onClick={() => props.logOut()}>
+                Log Out
+              </Dropdown.Item>
+            ) : (
+              <Link to="/signup">
+                <Dropdown.Item href="#/action-1">Sign Up</Dropdown.Item>
+              </Link>
+            )}
           </DropdownButton>
         </Nav>
         <Link to="/" className="nav-brands">
@@ -46,17 +58,33 @@ function MainNav() {
             <Link className="nav-link" to="/cities">
               Cities
             </Link>
-            <Link className="nav-link" to="/signin">
-              Sign In
-            </Link>
-            <Link className="nav-link" to="/signup">
-              Sign Up
-            </Link>
+            {props.user ? (
+              ""
+            ) : (
+              <>
+                <Link className="nav-link" to="/signin">
+                  Sign In
+                </Link>
+                <Link className="nav-link" to="/signup">
+                  Sign Up
+                </Link>
+              </>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    user: state.authReducer.response,
+  };
+};
 
-export default MainNav;
+const mapDispatchToProps = {
+  authUser: authActions.authUser,
+  logOut: authActions.logOut,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainNav);

@@ -8,14 +8,13 @@ import Mytinerary from "../assets/mytinerary-cn.svg";
 import Logo from "../assets/logo2.png";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import authActions from "../redux/actions/authActions";
 import MessageType from "../components/MessageType";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import {GoogleLogin} from 'react-google-login';
-
+import { GoogleLogin } from "react-google-login";
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -26,10 +25,28 @@ class SignIn extends React.Component {
       password: "",
       validated: false,
       isValid: false,
-      modalShow: false,
+      modalShow: true,
+      country: "Argentina",
+      selectedCountry: false,
+      show: true,
     };
-    this.props.setLoad(false)
+    this.props.setLoad(false);
   }
+
+  componentDidMount() {
+    this.props.getCountries();
+  }
+  handleCountry() {
+    if (this.props.user.country) {
+      if (this.state.country !== this.props.user.country) {
+        return this.props.user.country;
+      }
+    } else {
+      return this.state.country;
+    }
+  }
+  handleClose = () => this.setState({ show: false });
+  handleShow = () => this.setState({ show: true });
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
@@ -37,26 +54,25 @@ class SignIn extends React.Component {
   };
   responseGoogle = (response) => {
     const { givenName, familyName, email, googleId, imageUrl } =
-    response.profileObj;
-    const googlePassword = googleId + "F1#"
-  let googleUser = {
-    name: givenName,
-    lastName: familyName,
-    email: email,
-    password: googlePassword,
-    image: imageUrl,
-      country:'',
-      googleUser: true
+      response.profileObj;
+    const googlePassword = googleId + "F1#";
+    let googleUser = {
+      name: givenName,
+      lastName: familyName,
+      email: email,
+      password: googlePassword,
+      image: imageUrl,
+      country: "",
+      googleUser: true,
+    };
+    this.props.saveUser(googleUser);
   };
-  console.log(googleUser);
-  this.props.saveUser(googleUser);
-  }
-  
 
   resetValues() {
     this.setState({
       email: "",
       password: "",
+      modalShow: true,
     });
   }
 
@@ -64,6 +80,7 @@ class SignIn extends React.Component {
     let user = {
       email: this.state.email,
       password: this.state.password,
+      googleUser: false,
     };
 
     event.preventDefault();
@@ -75,9 +92,7 @@ class SignIn extends React.Component {
       this.props.setLoad(true);
       this.setState({ isValid: true });
       this.props.signIn(user);
-      this.setState({ modalShow: true });
       this.resetValues();
-      console.log(user);
     }
 
     this.setState({ validated: true });
@@ -91,16 +106,6 @@ class SignIn extends React.Component {
     }
   };
   render() {
-    // console.log("la form es valida?");
-    // console.log(this.state.isValid);
-    // console.log("COMPONENT: esto llega desde el store principal");
-    // console.log("la response: " + JSON.stringify(this.props.response));
-    // console.log("la error: " + JSON.stringify(this.props.error));
-    // console.log("la success: " + JSON.stringify(this.props.success));
-
-    if (this.props.success) {
-      return <Navigate to="/" />;
-    }
     return (
       <>
         <Container
@@ -153,29 +158,119 @@ class SignIn extends React.Component {
                   xxl={8}
                   className="form-sign d-flex flex-column justify-content-center align-items-center p-2 p-md-5 p-lg-5 p-xxl-5"
                 >
-                  <Modal
-                    show={this.state.modalShow}
-                    size="lg"
-                    aria-labelledby="contained-modal-title-vcenter"
-                    centered
-                  >
-                    <Modal.Header>
-                      <Modal.Title id="contained-modal-title-vcenter">
-                        <h4>Error Message</h4>
-                      </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                      <p>{this.props.error}</p>
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button
-                        onClick={() => this.setState({ modalShow: false })}
-                      >
-                        Close
-                      </Button>
-                    </Modal.Footer>
-                  </Modal>
+                  {this.props.error ? (
+                    <Modal
+                      show={this.state.modalShow}
+                      size="lg"
+                      aria-labelledby="contained-modal-title-vcenter"
+                      centered
+                    >
+                      <Modal.Header>
+                        <Modal.Title id="contained-modal-title-vcenter">
+                          <h4>Error Message</h4>
+                        </Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <p>{this.props.error}</p>
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button
+                          onClick={() => this.setState({ modalShow: false })}
+                        >
+                          Close
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
+                  ) : (
+                    ""
+                  )}
 
+                  {this.props.success && (
+                    <Modal
+                      show={this.props.success}
+                      onHide={this.handleClose}
+                      backdrop="static"
+                      keyboard={false}
+                    >
+                      <Modal.Header>
+                        <Modal.Title>MyTinerary!🎉</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        Welcome to Mytinerary,
+                        <strong>{this.props.user.name}</strong>!
+                        {this.props.user.googleUser &&
+                        !this.props.user.country ? (
+                          <>
+                            <p>Please select your country before proceding:</p>{" "}
+                            <FloatingLabel
+                              controlId="floatingSelect"
+                              label="Country"
+                            >
+                              <Form.Select
+                                required
+                                aria-label="Floating label select example"
+                                name="country"
+                                type="text"
+                                value={this.state.country}
+                                onChange={(e) =>
+                                  this.setState({
+                                    selectedCountry: true,
+                                    country: e.target.value,
+                                  })
+                                }
+                              >
+                                {this.props.countries.length ? (
+                                  ""
+                                ) : (
+                                  <option value="Argentina">Loading...</option>
+                                )}
+                                {this.props.countries
+                                  .sort((a, b) => a.name.localeCompare(b.name))
+                                  .map((country) => (
+                                    <option
+                                      key={country.name}
+                                      value={country.name}
+                                    >
+                                      {country.name}
+                                    </option>
+                                  ))}
+                              </Form.Select>
+                              <Form.Control.Feedback type="invalid">
+                                Please select your country.
+                              </Form.Control.Feedback>
+                            </FloatingLabel>{" "}
+                          </>
+                        ) : (
+                          <p>
+                            Please save your email and password somewhere
+                            safe.😉
+                          </p>
+                        )}
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button
+                          variant="primary"
+                          onClick={this.handleClose}
+                          disabled={
+                            !this.state.selectedCountry &&
+                            !this.props.user.country
+                          }
+                        >
+                          <Link
+                            to="/"
+                            onClick={(e) =>
+                              this.props.modifyUser({
+                                email: this.props.user.email,
+                                country: this.handleCountry(),
+                              })
+                            }
+                          >
+                            Go to Home
+                          </Link>
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
+                  )}
                   <img className="sign-logo" src={Logo} alt="user" />
                   <h2 className="text-white fw-bold text-center">
                     Sign In to MyTinerary
@@ -253,12 +348,12 @@ class SignIn extends React.Component {
                   </Form>
                   <p className="text-white">or sign in with Google</p>
                   <GoogleLogin
-    clientId="190201580680-u46pho0n2vjalcan540tm22oan4vhc0v.apps.googleusercontent.com"
-    buttonText="Login"
-    onSuccess={this.responseGoogle}
-    onFailure={this.responseGoogle}
-    cookiePolicy={'single_host_origin'}
-    />
+                    clientId="190201580680-u46pho0n2vjalcan540tm22oan4vhc0v.apps.googleusercontent.com"
+                    buttonText="Login"
+                    onSuccess={this.responseGoogle}
+                    onFailure={this.responseGoogle}
+                    cookiePolicy={"single_host_origin"}
+                  />
                 </Col>
               )}
 
@@ -274,16 +369,20 @@ class SignIn extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    response: state.authReducer.response,
+    user: state.authReducer.response,
     error: state.authReducer.error,
     success: state.authReducer.success,
     isLoading: state.authReducer.isLoading,
+    countries: state.authReducer.countries,
   };
 };
 const mapDispatchToProps = {
   signIn: authActions.signIn,
   setLoad: authActions.setLoad,
-  saveUser : authActions.saveUser
+  saveUser: authActions.saveUser,
+  getCountries: authActions.getCountries,
+  modifyUser: authActions.modifyUser,
+  resetError: authActions.resetErrors,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

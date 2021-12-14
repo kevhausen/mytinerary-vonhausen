@@ -32,18 +32,18 @@ class SignUp extends React.Component {
       validated: false,
       isValid: false,
       show: true,
-      selectedCountry:false
+      selectedCountry: false,
     };
     this.props.setLoad(false);
   }
-  handleCountry(){
-      if(this.props.user.country){
-        if(this.state.country !== this.props.user.country){
-            return this.props.user.country
-        }
-      }else{
-          return this.state.country
-      } 
+  handleCountry() {
+    if (this.props.user.country) {
+      if (this.state.country !== this.props.user.country) {
+        return this.props.user.country;
+      }
+    } else {
+      return this.state.country;
+    }
   }
 
   resetValues() {
@@ -59,17 +59,16 @@ class SignUp extends React.Component {
   responseGoogle = (response) => {
     const { givenName, familyName, email, googleId, imageUrl } =
       response.profileObj;
-      const googlePassword = googleId + "F1#"
+    const googlePassword = googleId + "F1#";
     let googleUser = {
       name: givenName,
       lastName: familyName,
       email: email,
       password: googlePassword,
       image: imageUrl,
-        country:'',
-        googleUser: true
+      country: "",
+      googleUser: true,
     };
-    console.log(googleUser);
     this.props.saveUser(googleUser);
   };
 
@@ -117,7 +116,7 @@ class SignUp extends React.Component {
   };
 
   getError = (path) => {
-    if (this.props.error !== null) {
+    if (this.props.error !== null && this.props.error !== undefined) {
       if (this.props.error.length > 0 && this.props.error.length < 10) {
         let pathErrors =
           path === "password"
@@ -138,11 +137,6 @@ class SignUp extends React.Component {
   handleShow = () => this.setState({ show: true });
 
   render() {
-    console.log("esto llega del store ERROR");
-    console.log(this.props.error);
-    console.log("estos son los errores de password");
-    console.log(this.getError("password"));
-
     return (
       <>
         <Container
@@ -180,54 +174,77 @@ class SignUp extends React.Component {
                       keyboard={false}
                     >
                       <Modal.Header>
-                        <Modal.Title>
-                          Account succesfully created!🎉
-                        </Modal.Title>
+                        <Modal.Title>MyTinerary!🎉</Modal.Title>
                       </Modal.Header>
                       <Modal.Body>
-                          {console.log(this.props)}
-                        {console.log(this.props.user.name)}
                         Welcome to Mytinerary,
-                        <strong>{this.props.user.name}</strong>! 
-                        {(this.props.user.googleUser) && (!this.props.user.country)? <><p>Please select your country before proceding:</p> <FloatingLabel controlId="floatingSelect" label="Country">
-                      <Form.Select
-                        required
-                        aria-label="Floating label select example"
-                        name="country"
-                        type="text"
-                        value={this.state.country}
-                        onChange={(e) => this.setState({selectedCountry: true, country:e.target.value})}
-                      >
-                        {this.props.countries.length ? (
-                          ""
+                        <strong>{this.props.user.name}</strong>!
+                        {this.props.user.googleUser &&
+                        !this.props.user.country ? (
+                          <>
+                            <p>Please select your country before proceding:</p>{" "}
+                            <FloatingLabel
+                              controlId="floatingSelect"
+                              label="Country"
+                            >
+                              <Form.Select
+                                required
+                                aria-label="Floating label select example"
+                                name="country"
+                                type="text"
+                                value={this.state.country}
+                                onChange={(e) =>
+                                  this.setState({
+                                    selectedCountry: true,
+                                    country: e.target.value,
+                                  })
+                                }
+                              >
+                                {this.props.countries.length ? (
+                                  ""
+                                ) : (
+                                  <option value="Argentina">Loading...</option>
+                                )}
+                                {this.props.countries
+                                  .sort((a, b) => a.name.localeCompare(b.name))
+                                  .map((country) => (
+                                    <option
+                                      key={country.name}
+                                      value={country.name}
+                                    >
+                                      {country.name}
+                                    </option>
+                                  ))}
+                              </Form.Select>
+                              <Form.Control.Feedback type="invalid">
+                                Please select your country.
+                              </Form.Control.Feedback>
+                            </FloatingLabel>{" "}
+                          </>
                         ) : (
-                          <option value="Argentina">Loading...</option>
+                          <p>Please enjoy your stay.😉</p>
                         )}
-                        {this.props.countries
-                          .sort((a, b) => a.name.localeCompare(b.name))
-                          .map((country) => (
-                            <option key={country.name} value={country.name}>
-                              {country.name}
-                            </option>
-                          ))}
-                      </Form.Select>
-                      <Form.Control.Feedback type="invalid">
-                        Please select your country.
-                      </Form.Control.Feedback>
-                    </FloatingLabel> </> : <p>Please save your email and password somewhere safe.😉</p> }
-                     
-                        
-                        
-                        
                       </Modal.Body>
                       <Modal.Footer>
-                        
-                          <Button variant="primary" onClick={this.handleClose} disabled={!this.state.selectedCountry && !this.props.user.country}>
-                          <Link to="/" onClick={(e)=>this.props.modifyUser({email: this.props.user.email, country: this.handleCountry()})}>
+                        <Button
+                          onClick={this.handleClose}
+                          disabled={
+                            !this.state.selectedCountry &&
+                            !this.props.user.country
+                          }
+                        >
+                          <Link
+                            to="/"
+                            onClick={(e) =>
+                              this.props.modifyUser({
+                                email: this.props.user.email,
+                                country: this.handleCountry(),
+                              })
+                            }
+                          >
                             Go to Home
-                            </Link>
-                          </Button>
-                        
+                          </Link>
+                        </Button>
                       </Modal.Footer>
                     </Modal>
                   )}
@@ -371,18 +388,24 @@ class SignUp extends React.Component {
                         value={this.state.country}
                         onChange={(e) => this.handleChange(e)}
                       >
-                        {this.props.countries.length ? (
-                          ""
+                        {this.props.countries ? (
+                          this.props.countries.length ? (
+                            ""
+                          ) : (
+                            <option value="Argentina">Loading...</option>
+                          )
                         ) : (
-                          <option value="Argentina">Loading...</option>
+                          ""
                         )}
                         {this.props.countries
-                          .sort((a, b) => a.name.localeCompare(b.name))
-                          .map((country) => (
-                            <option key={country.name} value={country.name}>
-                              {country.name}
-                            </option>
-                          ))}
+                          ? this.props.countries
+                              .sort((a, b) => a.name.localeCompare(b.name))
+                              .map((country) => (
+                                <option key={country.name} value={country.name}>
+                                  {country.name}
+                                </option>
+                              ))
+                          : ""}
                       </Form.Select>
                       <Form.Control.Feedback type="invalid">
                         Please select your country.
@@ -442,7 +465,7 @@ class SignUp extends React.Component {
 
                 <p className="text-white">
                   Already have an account?{" "}
-                  <Link to="/signin">
+                  <Link to="/signin" onClick={() => this.props.resetError()}>
                     <strong>Sign In</strong>
                   </Link>
                 </p>
@@ -472,7 +495,8 @@ const mapDispatchToProps = {
   getCountries: authActions.getCountries,
   saveUser: authActions.saveUser,
   setLoad: authActions.setLoad,
-  modifyUser: authActions.modifyUser
+  modifyUser: authActions.modifyUser,
+  resetError: authActions.resetErrors,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

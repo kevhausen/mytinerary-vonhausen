@@ -22,23 +22,31 @@ const authReducer = (state = initialState, action) => {
         isLoading: action.payload.loading,
       };
     case "SET_LOAD":
-        
       return {
         ...state,
         isLoading: action.payload,
       };
-      case "SIGN_IN":
-        console.log("REDUCER: esto se guarda en store principal")
-        console.log("en el response:" + JSON.stringify(state.response) + ', se guarda: ' + action.payload.response )
-        console.log("en el error:" + JSON.stringify(state.error) + ', se guarda: ' + action.payload.error )
-        console.log("en el success:" + JSON.stringify(state.success) + ', se guarda: ' + action.payload.success )
-          return{
-              ...state,
-              response:action.payload.info.response,
-              error:action.payload.info.error,
-              success:action.payload.info.success,
-              isLoading: action.payload.loading
-          }
+    case "SIGN_IN":
+      return {
+        ...state,
+        response: action.payload.info.response,
+        error: action.payload.info.error,
+        success: action.payload.info.success,
+        isLoading: action.payload.loading,
+      };
+    case "LOG_OUT":
+      return {
+        ...initialState,
+      };
+
+    case "IS_AUTH":
+      return {
+        response: action.payload,
+      };
+    case "RESET_ERROR":
+      return {
+        error: null,
+      };
     default:
       return state;
   }

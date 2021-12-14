@@ -15,10 +15,17 @@ import withRouter from "./utilities/withRouter";
 import About from "./pages/About";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import { connect } from "react-redux";
+import authActions from "./redux/actions/authActions";
+import { useEffect } from "react";
 
 const CityDinamic = withRouter(City);
 
-function App() {
+function App(props) {
+  const { authUser } = props;
+  useEffect(() => {
+    authUser();
+  }, [authUser]);
   return (
     <BrowserRouter>
       <Routes>
@@ -31,10 +38,20 @@ function App() {
         <Route path="signup" element={<SignUp />} />
         <Route path="cities/:id" element={<CityDinamic />} />
         <Route path="cities" element={<Cities />} />
-        <Route path="*" element={<ErrorPage />} />
+        <Route path="*" element={<Home />} />
       </Routes>
     </BrowserRouter>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    user: state.authReducer.response,
+  };
+};
+
+const mapDispatchToProps = {
+  authUser: authActions.authUser,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
