@@ -6,17 +6,20 @@ const jwt = require('jsonwebtoken')
 
 const authController = {
   saveUser: async (req, res) => {
-      console.log('esto llega del action (variable user)')
-      console.log(req.body)
-    const { name, lastName, email, password, image, country } = req.body;
-    let users = await User.findOne({ email });
-    console.log(users);
+    const { name, lastName, email, password, image, country, googleUser } = req.body;
+    let user = await User.findOne({ email });
+    console.log(user)
     try {
-      if (users) {
+        if(user){
+            if(user.googleUser){
+                return res.json({ response: user, success: true,error:null });
+            }
+        }
+      if (user) {
         res.json({
-          response: "Email " + users.email + " is already taken",
+          response: null,
           success: false,
-          error:null
+          error:[{message:"Email " + user.email + " is already taken", path:["email"]}]
         });
       } else {
         const passwordHashed = bcryptjs.hashSync(password, 10);
@@ -27,9 +30,11 @@ const authController = {
           password: passwordHashed,
           image,
           country,
+          googleUser
         }).save();
         const token = jwt.sign({user},process.env.SECRET_KEY)
-        res.json({ response: {user,token}, success: true,error:null });
+        console.log(user)
+        res.json({ response: user, success: true,error:null, token:token });
       }
     } catch (e) {
         console.log(e)
@@ -43,17 +48,17 @@ const authController = {
       let samePassword = user? bcryptjs.compareSync(password, user.password) : false;
       if (user && samePassword) {
           const token = jwt.sign({user},process.env.SECRET_KEY)
-          console.log(token)
-        res.json({ success: true, response: {user, token} });
+        res.json({ success: true, response: {user, token}, error:null });
       } else {
         res.json({
           success: false,
-          response: "The username or password is incorrect",
+          response: null,
+          error: "The username or password is incorrect"
         });
       }
     } catch (e) {
         console.log(e)
-      res.json({ success: false, error: e.message });
+      res.json({ success: false, error: e.message, response:null });
     }
   },
   getUsers: async (req, res) => {
@@ -82,6 +87,17 @@ const authController = {
       console.error(e);
     }
   },
+  modifyUser : async(req,res)=>{
+    try {
+        console.log('MODIFY-USER: esto es el req.body' + JSON.stringify(req.body))
+        await User.findOneAndUpdate({ email: req.body.email }, { ...req.body });
+        res.json({ response: true });
+      } catch (e) {
+        console.error(e);
+        res.json({ response: false });
+      }
+
+  }
 };
 
 module.exports = authController;
