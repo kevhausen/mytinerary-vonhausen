@@ -89,7 +89,7 @@ function Itineraries(props) {
               </div>
             </Container>
             {/* al ActivitySection se le pasaria por props, sus comments */}
-            <ActivitiesSection />
+            <ActivitiesSection id={itinerary._id} />
           </Container>
         ))
       ) : (
@@ -113,12 +113,14 @@ const mapStateToProps = (state) => {
   return {
     itineraries: state.itinerariesReducer.itineraries,
     isLoading: state.itinerariesReducer.isLoading,
+    activities:state.itinerariesReducer.activities
   };
 };
 
 const mapDispatchToProps = {
   getItinerariesByCity: itinerariesActions.getItinerariesByCity,
   setLoad: itinerariesActions.setLoad,
+  getActivities : itinerariesActions.getActivities
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Itineraries);

@@ -3,8 +3,9 @@ const router = express.Router();
 const citiesControllers = require("../controllers/citiesControllers.js");
 const itinerariesControllers = require("../controllers/itinerariesControllers.js");
 const authControllers = require("../controllers/authControllers.js");
+const activityControllers = require("../controllers/activityControllers.js")
 const validator = require("../config/validator")
-const passport = require('../config/passport')
+const passport = require('../config/passport');
 
 const {
   getCarrouselCities,
@@ -24,6 +25,7 @@ const {
 } = itinerariesControllers;
 
 const { getCountries, uploadCountries, saveUser, getUsers, signIn , modifyUser, authUser} = authControllers;
+const {uploadActivity, getActivity,modifyActivity,getActivitiesByItinerary} = activityControllers
 
 router.route("/carrousel-cities").get(getCarrouselCities);
 
@@ -53,5 +55,9 @@ router.route("/auth/signin").post(signIn)
 router.route("/auth/user").get(passport.authenticate('jwt',{session:false}), authUser)
 
 router.route("/countries").get(getCountries).post(uploadCountries);
+router.route("/activity").post(uploadActivity)
+router.route("/activities").post(getActivitiesByItinerary)
+router.route("/activity/:id").get(getActivity).put(modifyActivity)
+
 
 module.exports = router;

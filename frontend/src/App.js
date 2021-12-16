@@ -22,10 +22,12 @@ import { useEffect } from "react";
 const CityDinamic = withRouter(City);
 
 function App(props) {
+
   const { authUser } = props;
   useEffect(() => {
     authUser();
   }, [authUser]);
+
   return (
     <BrowserRouter>
       <Routes>

@@ -81,6 +81,7 @@ class SignUp extends React.Component {
       [event.target.name]: event.target.value,
     });
   };
+
   handleSubmit = (event) => {
     const { name, lastName, email, password, image, country } = this.state;
     let user = {

@@ -14,6 +14,15 @@ const itinerariesActions = {
       dispatch({ type: "SET_LOAD", payload: true });
     };
   },
+  getActivities : (id)=>{
+      return async(dispatch)=>{
+          console.log('este id me llega desde el component: ' + id)
+          let res = await axios.post("http://localhost:4000/api/activities",{id:id})
+          console.log(res.data.response)
+          dispatch({type: "GET_ACTIVITIES", payload: {itineraryId: id, activityList: res.data.response}})
+          
+      }
+  }
 };
 
 export default itinerariesActions;
