@@ -275,6 +275,16 @@ div a {
   background-image: linear-gradient(to bottom, var(--mainColor), #0d2a41);
 }
 
+.activity-image{
+
+    height: 9rem;
+    /* object-fit: cover; */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center; 
+    background-blend-mode: var(--mainColor);
+}
+
 .bg-main {
   background-color: var(--mainColor) !important;
 }
