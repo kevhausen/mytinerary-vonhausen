@@ -275,6 +275,13 @@ div a {
   background-image: linear-gradient(to bottom, var(--mainColor), #0d2a41);
 }
 
+.body-link{
+    color:var(--mainColor) !important
+}
+.popover-header{
+    background-color: #122e43 !important;
+    color: white !important;
+}
 .activity-image{
 
     height: 9rem;

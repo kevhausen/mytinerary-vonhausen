@@ -70,8 +70,8 @@ const itinerariesControllers = {
   },
   modifyItinerary: async (req, res) => {
     try {
-      await Itinerary.findOneAndUpdate({ _id: req.params.id }, { ...req.body });
-      res.json({ response: true });
+      let newItinerary = await Itinerary.findOneAndUpdate({ _id: req.params.id }, { ...req.body },{new:true});
+      res.json({ success:true,response: newItinerary });
     } catch (e) {
       console.error(e);
     }

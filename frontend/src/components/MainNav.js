@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import authActions from "../redux/actions/authActions";
 
 function MainNav(props) {
+    const token = localStorage.getItem('token')
   let imagenUsuario = (
     <Image
       className="user-icon"
@@ -52,7 +53,7 @@ function MainNav(props) {
             <Link className="nav-link" to="/cities">
               Cities
             </Link>
-            {props.user ? (
+            {token ? (
               ""
             ) : (
               <>

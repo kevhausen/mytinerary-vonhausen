@@ -121,8 +121,7 @@ class SignIn extends React.Component {
                 lg={4}
                 xl={4}
                 xxl={4}
-                className="welcome-sign d-flex flex-column align-items-center justify-content-center p-1 p-xxl-5"
-              >
+                className="welcome-sign d-flex flex-column align-items-center justify-content-center p-1 p-xxl-5">
                 <p className="text-white display-6 fw-bold text-center">
                   Welcome Back!
                 </p>
@@ -245,7 +244,22 @@ class SignIn extends React.Component {
                         )}
                       </Modal.Body>
                       <Modal.Footer>
-                        <Button
+                          <button onClick={this.handleClose}
+                          disabled={
+                            !this.state.selectedCountry &&
+                            !this.props.user.country
+                          }><Link
+                          to="/"
+                          onClick={(e) =>
+                            this.props.modifyUser({
+                              email: this.props.user.email,
+                              country: this.handleCountry(),
+                            })
+                          }
+                        >
+                          Go to Home
+                        </Link></button>
+                        {/* <Button
                           variant="primary"
                           onClick={this.handleClose}
                           disabled={
@@ -264,7 +278,7 @@ class SignIn extends React.Component {
                           >
                             Go to Home
                           </Link>
-                        </Button>
+                        </Button> */}
                       </Modal.Footer>
                     </Modal>
                   )}
@@ -382,4 +396,4 @@ const mapDispatchToProps = {
   resetError: authActions.resetErrors,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps,mapDispatchToProps)(SignIn);

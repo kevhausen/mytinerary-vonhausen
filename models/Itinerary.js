@@ -16,7 +16,7 @@ const itinerarySchema = new mongoose.Schema({
     min: [1, "Duration value must be at least 1, got {VALUE}"],
     require: true,
   },
-  likes: { type: Number, default: 0 },
+  likes: { type: [String] },
   hashtags: { type: [String], require: true },
   comments: { type: [String] },
   city: { type: [{ type: mongoose.Types.ObjectId, ref: "city" }] }

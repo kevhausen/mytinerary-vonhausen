@@ -25,7 +25,10 @@ function App(props) {
 
   const { authUser } = props;
   useEffect(() => {
-    authUser();
+      const token =localStorage.getItem('token')
+      if(token){
+          authUser();
+        }
   }, [authUser]);
 
   return (

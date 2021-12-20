@@ -12,10 +12,12 @@ import Dolar from "../../assets/dollar.png";
 import MessageType from "../MessageType";
 import useConstructor from "../../utilities/useConstructor";
 
+
 function Itineraries(props) {
   useConstructor(() => {
     props.setLoad();
   });
+ 
 
   function dolarQuantity(price) {
     return Array.from({ length: price });
@@ -69,7 +71,7 @@ function Itineraries(props) {
                     </div>
                   </Col>
                   <Col className="d-flex flex-column align-items-center justify-content-center like-container">
-                    <LikeComponent likes={itinerary.likes} />
+                    <LikeComponent likes={itinerary.likes} itineraryId={itinerary._id} />
                   </Col>
                 </Row>
               </Container>
@@ -88,7 +90,6 @@ function Itineraries(props) {
                 </div>
               </div>
             </Container>
-            {/* al ActivitySection se le pasaria por props, sus comments */}
             <ActivitiesSection id={itinerary._id} />
           </Container>
         ))

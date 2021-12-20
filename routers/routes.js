@@ -4,6 +4,7 @@ const citiesControllers = require("../controllers/citiesControllers.js");
 const itinerariesControllers = require("../controllers/itinerariesControllers.js");
 const authControllers = require("../controllers/authControllers.js");
 const activityControllers = require("../controllers/activityControllers.js")
+const interactionsControllers = require("../controllers/interactionsControllers")
 const validator = require("../config/validator")
 const passport = require('../config/passport');
 
@@ -26,6 +27,7 @@ const {
 
 const { getCountries, uploadCountries, saveUser, getUsers, signIn , modifyUser, authUser} = authControllers;
 const {uploadActivity, getActivity,modifyActivity,getActivitiesByItinerary} = activityControllers
+const { setLike} = interactionsControllers
 
 router.route("/carrousel-cities").get(getCarrouselCities);
 
@@ -43,12 +45,6 @@ router
   .put(modifyItinerary)
   .delete(deleteItinerary);
 
-// router.route('/auth/signUp')
-// .post(validator, authControllers.signUpUser)
-// .get(authControllers.readUsers)
-
-// router.route('/auth/signIn')
-// .post(validator, authControllers.signInUser)
 router.route("/auth/signup").get(getUsers).post(validator,saveUser).put(modifyUser)
 router.route("/auth/signin").post(signIn)
 
@@ -58,6 +54,8 @@ router.route("/countries").get(getCountries).post(uploadCountries);
 router.route("/activity").post(uploadActivity)
 router.route("/activities").post(getActivitiesByItinerary)
 router.route("/activity/:id").get(getActivity).put(modifyActivity)
+
+router.route("/interaction/likes").put(setLike)
 
 
 module.exports = router;
