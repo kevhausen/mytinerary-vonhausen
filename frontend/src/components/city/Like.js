@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 function LikeComponent(props) {
   const [isLiked, setLiked] = useState(false);
   const { likes, user } = props;
+  const [likeQuantity, setLikeQuantity] = useState(0)
 
   const popover = (
     <Popover id="popover-basic">
@@ -17,13 +18,13 @@ function LikeComponent(props) {
         Logged-in Users Only
       </Popover.Header>
       <Popover.Body>
-        Please
+        Please{" "} 
         <Link className="body-link" to="/signin">
-          SIGN IN
+           SIGN IN{" "} 
         </Link>
-        or
+        or{" "} 
         <Link className="body-link" to="/signup">
-          SIGN UP
+          SIGN UP{" "} 
         </Link>
         to <strong>MyTinerary</strong> to be able to hit like on itineraries!
       </Popover.Body>
@@ -31,6 +32,7 @@ function LikeComponent(props) {
   );
 
   useEffect(() => {
+    setLikeQuantity(likes.length)
     if (user) {
       if (likes.includes(user._id) && isLiked === false) {
         setLiked(true);
@@ -39,6 +41,7 @@ function LikeComponent(props) {
     if (!user) {
       setLiked(false);
     }
+    
   }, [user, likes]);
 
   const likesHandle = () => {
@@ -46,9 +49,12 @@ function LikeComponent(props) {
       if (likes.includes(user._id)) {
         props.setLike(props.user._id, props.itineraryId, false);
         setLiked(false);
+        setLikeQuantity(likeQuantity)
+        
       } else {
         props.setLike(props.user._id, props.itineraryId, true);
         setLiked(true);
+        setLikeQuantity(likeQuantity+1)
       }
     }
   };
@@ -75,7 +81,7 @@ function LikeComponent(props) {
         />
       )}
 
-      <p className="text-light">{likes.length}</p>
+      <p className="text-light">{likeQuantity}</p>
     </>
   );
 }

@@ -29,18 +29,14 @@ const itinerariesReducer = (state = initialState, action) => {
       }
       return {
         ...state,
-        activities: result,
+        activities: result
       };
 
       case "SET_LIKE":
-          console.log('REDUCER: esta es la lista actual de itinerarios')
-          console.log(state.itineraries)
-          console.log("REDUCER: esto es el action.payload que se esta insertando en itineraries")
-          console.log(action.payload)
+
           let newId = action.payload._id
           let newList = state.itineraries.map(itinerary=>(itinerary._id === newId? {...itinerary, likes:action.payload.likes}:itinerary))
-          console.log("REDUCER: esta es la nueva lista actualizada")
-          console.log(newList)
+
           return{
               ...state,
               itineraries:newList

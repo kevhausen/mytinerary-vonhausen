@@ -283,9 +283,7 @@ div a {
     color: white !important;
 }
 .activity-image{
-
     height: 9rem;
-    /* object-fit: cover; */
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center; 

@@ -1,5 +1,5 @@
 const express = require("express");
-const router = express.Router();
+const Router = express.Router();
 const citiesControllers = require("../controllers/citiesControllers.js");
 const itinerariesControllers = require("../controllers/itinerariesControllers.js");
 const authControllers = require("../controllers/authControllers.js");
@@ -27,35 +27,40 @@ const {
 
 const { getCountries, uploadCountries, saveUser, getUsers, signIn , modifyUser, authUser} = authControllers;
 const {uploadActivity, getActivity,modifyActivity,getActivitiesByItinerary} = activityControllers
-const { setLike} = interactionsControllers
+const { setLike,getCommentsByItineraryId,postComment,modifyComment, editComment, deleteComment} = interactionsControllers
 
-router.route("/carrousel-cities").get(getCarrouselCities);
+Router.route("/carrousel-cities").get(getCarrouselCities);
 
-router.route("/cities").get(getAllCities).post(uploadCity);
+Router.route("/cities").get(getAllCities).post(uploadCity);
 
-router.route("/cities/:id").get(getCity).delete(deleteCity).put(modifyCity);
+Router.route("/cities/:id").get(getCity).delete(deleteCity).put(modifyCity);
 
-router.route("/itineraries").get(getItineraries).post(uploadItinerary);
+Router.route("/itineraries").get(getItineraries).post(uploadItinerary);
 
-router.route("/itineraries/:city").get(getItinerariesByCityId);
+Router.route("/itineraries/:city").get(getItinerariesByCityId);
 
-router
+Router
   .route("/itinerary/:id")
   .get(getItineraryById)
   .put(modifyItinerary)
   .delete(deleteItinerary);
 
-router.route("/auth/signup").get(getUsers).post(validator,saveUser).put(modifyUser)
-router.route("/auth/signin").post(signIn)
+Router.route("/auth/signup").get(getUsers).post(validator,saveUser).put(modifyUser)
+Router.route("/auth/signin").post(signIn)
 
-router.route("/auth/user").get(passport.authenticate('jwt',{session:false}), authUser)
+Router.route("/auth/user").get(passport.authenticate('jwt',{session:false}), authUser)
 
-router.route("/countries").get(getCountries).post(uploadCountries);
-router.route("/activity").post(uploadActivity)
-router.route("/activities").post(getActivitiesByItinerary)
-router.route("/activity/:id").get(getActivity).put(modifyActivity)
+Router.route("/countries").get(getCountries).post(uploadCountries);
+Router.route("/activity").post(uploadActivity)
+Router.route("/activities").post(getActivitiesByItinerary)
+Router.route("/activity/:id").get(getActivity).put(modifyActivity)
 
-router.route("/interaction/likes").put(setLike)
+Router.route("/interaction/likes").put(setLike)
+Router.route("/interaction/comments")
+  .get(getCommentsByItineraryId)
+  .post(postComment)
+  .put(editComment)
+  .delete(deleteComment)
 
 
-module.exports = router;
+module.exports = Router;

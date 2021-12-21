@@ -47,23 +47,19 @@ const activityControllers = {
       try{
           let activity = await Activity.findOne({_id : req.params.id})
           res.json({success: true, response: activity})
-
       }catch(e){
           res.json({success:false, error:e})
       }
   },
   getActivitiesByItinerary : async (req,res)=>{
       try{
-
           console.log('este el el req.body '+JSON.stringify(req.body))
           let activitiesById = (await Activity.find().populate('itinerary',"itineraryName")).filter(e=> e.itinerary[0]._id.toString() === req.body.id)
           console.log(activitiesById)
           res.json({success:true, response: activitiesById})
-
       }catch(e){
           console.log(e)
           res.json({error: e, success : false})
-
       }
   }
 };
