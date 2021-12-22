@@ -283,11 +283,51 @@ div a {
     color: white !important;
 }
 .activity-image{
+    transition: .2s;
     height: 9rem;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center; 
-    background-blend-mode: var(--mainColor);
+    background-blend-mode: var(--mainColor); 
+}
+
+.activity-image:hover{
+    transition: .2s;
+    transform: scale(1.05); 
+}
+.activity-title{
+    font-size: 2rem;
+    text-shadow: 2px 2px black;
+}
+
+.activity-description{
+    visibility: hidden;
+
+}
+.activity-button{
+    transition: .2s;
+    background-color: rgba(0, 0, 0, 0);
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 5px 15px 5px 15px;
+    color:white;
+    font-size: 1.4rem;
+}
+.activity-button:hover{
+    transition: .2s;
+    background-color:white;
+    color: var(--mainColor);
+}
+
+.activity-button:active{
+    animation: press 0.05s 1 linear;
+}
+
+.activity-description:hover{
+    visibility: visible;
+}
+.hourglass{
+    width: 2rem;
 }
 
 .bg-main {
@@ -318,7 +358,37 @@ div a {
 .like:active {
   animation: press 0.1s 1 linear;
 }
+.comment-image{
+    height: 3.5rem;
+    width: 3.5rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center; 
+    border-radius: 10px;
+}
+.comment-holder{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;    
+}
+.comment-username{
+    font-size: .9rem;
+}
+.comment-email{
+    font-size: .7rem;
+    margin-top: -6px !important;
+    margin-bottom: 0px;
+}
+.comment-message{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: var(--mainColorLight);
+    padding: 5px;
+}
+.comment-message-text{
 
+}
 .liked-container {
   height: 3vh;
 }
@@ -333,11 +403,9 @@ div a {
     transform: scale(1);
   }
 }
-
 .h20 {
   height: 10vh !important;
 }
-
 .bg-main-light {
   background-image: linear-gradient(to bottom right, #2b4d68, #1e3950);
 }

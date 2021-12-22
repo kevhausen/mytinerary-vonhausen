@@ -5,6 +5,7 @@ function CitySection(props) {
   return (
     <Container fluid className="m-0 p-0 citySection">
       <MainNav />
+      <Container className="mock-container"></Container>
       <Container
         fluid
         className="m-0 p-0 city-bg d-flex justify-content-center align-items-center"

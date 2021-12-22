@@ -19,8 +19,9 @@ const interactionsControllers = {
   },
   getCommentsByItineraryId: async (req, res) => {
     try {
+        console.log(req.params.itineraryId)
       let commentList = await Comment.find({
-        itinerary: req.body.itinerary,
+        itinerary: req.params.itineraryId,
       }).populate({ path: "user", select: ["email", "image", "name"] });
       res.json({ success: true, error: null, response: commentList });
     } catch (e) {

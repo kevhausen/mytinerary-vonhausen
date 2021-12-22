@@ -56,11 +56,13 @@ Router.route("/activities").post(getActivitiesByItinerary)
 Router.route("/activity/:id").get(getActivity).put(modifyActivity)
 
 Router.route("/interaction/likes").put(setLike)
+
 Router.route("/interaction/comments")
-  .get(getCommentsByItineraryId)
   .post(postComment)
   .put(editComment)
   .delete(deleteComment)
+
+Router.route("/interaction/comments/:itineraryId").get(getCommentsByItineraryId)
 
 
 module.exports = Router;
