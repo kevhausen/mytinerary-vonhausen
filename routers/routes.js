@@ -60,9 +60,9 @@ Router.route("/interaction/likes").put(setLike)
 Router.route("/interaction/comments")
   .post(postComment)
   .put(editComment)
-  .delete(deleteComment)
+  
 
-Router.route("/interaction/comments/:itineraryId").get(getCommentsByItineraryId)
+Router.route("/interaction/comments/:itineraryId").get(getCommentsByItineraryId).delete(deleteComment)
 
 
 module.exports = Router;

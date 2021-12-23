@@ -41,7 +41,6 @@ function LikeComponent(props) {
     if (!user) {
       setLiked(false);
     }
-    
   }, [user, likes]);
 
   const likesHandle = () => {
@@ -60,7 +59,7 @@ function LikeComponent(props) {
   };
   return (
     <>
-      <p className="m-0 text-success text-shadow fw-bold liked-container">
+      <p className="m-0 text-warning text-shadow fw-bold liked-container">
         {isLiked ? "Liked!" : ""}
       </p>
       {!props.user ? (
@@ -81,7 +80,7 @@ function LikeComponent(props) {
         />
       )}
 
-      <p className="text-light">{likeQuantity}</p>
+      <p className="text-light display-6">{likeQuantity}</p>
     </>
   );
 }

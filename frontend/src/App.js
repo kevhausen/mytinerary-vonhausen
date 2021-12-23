@@ -49,14 +49,10 @@ function App(props) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.authReducer.response,
-  };
-};
+
 
 const mapDispatchToProps = {
   authUser: authActions.authUser,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(null, mapDispatchToProps)(App);

@@ -24,9 +24,14 @@ function MainNav(props) {
         <Nav>
           <DropdownButton id="dropdown-basic-button" title={imagenUsuario}>
             {props.user ? (
-              <Dropdown.Item onClick={() => props.logOut()}>
-                Log Out
+                <>
+              <Dropdown.Item as={Link} to="/account">
+                Account
               </Dropdown.Item>
+              <Dropdown.Item onClick={() => props.logOut()}>
+              Log Out
+            </Dropdown.Item>
+            </>
             ) : (
               <Dropdown.Item as={Link} to="/signup">
                 Sign Up

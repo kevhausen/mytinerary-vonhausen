@@ -12,17 +12,31 @@ const interactionActions = {
             
             let response = await axios.get("http://localhost:4000/api/interaction/comments/"+itineraryId)
             console.log(response.data.response)
-            dispatch({type: "GET_COMMENTS", payload: response.data.response})
+            dispatch({type: "GET_COMMENTS", payload: {info:response.data.response, comments}})
         }
     },
-    uploadComment : (user, itinerary, message)=>{
+    uploadComment : (data)=>{
         return async (dispatch)=>{
-            console.log('esto llega del componente')
-            console.log(user + itinerary + message)
-            let response = await axios.post("http://localhost:4000/api/interaction/comments/", {user,itinerary,message})
-            console.log('este es el response')
-            console.log(response)
+            let response = await axios.post("http://localhost:4000/api/interaction/comments/", data)
             dispatch({type: "UPLOAD_COMMENT", payload: response.data.response})
+        }
+    },
+    deleteComment : (id)=>{
+        return async (dispatch)=>{
+            console.log('ACTION: ESTA ES LA ID DEL COMMENT')
+            console.log(id)
+            let response= await axios.delete("http://localhost:4000/api/interaction/comments/"+ id)
+            dispatch({type:"DELETE_COMMENT", payload: response.data.response})
+        }
+    },
+    editComment: (data)=>{
+        return async (dispatch)=>{
+            console.log('ACTION: esto llega del component al hacer enter')
+            console.log(data)
+            let response = await axios.put("http://localhost:4000/api/interaction/comments/", data)
+            console.log('ACTION: ESTO DEVUELVE EL CONTROLADOR')
+            console.log(response.data.response)
+            dispatch({type:"EDIT_COMMENT", payload: response.data.response})
         }
     }
 }

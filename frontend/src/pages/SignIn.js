@@ -259,26 +259,7 @@ class SignIn extends React.Component {
                         >
                           Go to Home
                         </Link></button>
-                        {/* <Button
-                          variant="primary"
-                          onClick={this.handleClose}
-                          disabled={
-                            !this.state.selectedCountry &&
-                            !this.props.user.country
-                          }
-                        >
-                          <Link
-                            to="/"
-                            onClick={(e) =>
-                              this.props.modifyUser({
-                                email: this.props.user.email,
-                                country: this.handleCountry(),
-                              })
-                            }
-                          >
-                            Go to Home
-                          </Link>
-                        </Button> */}
+        
                       </Modal.Footer>
                     </Modal>
                   )}

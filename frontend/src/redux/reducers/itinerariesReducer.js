@@ -6,17 +6,17 @@ const initialState = {
 };
 
 const itinerariesReducer = (state = initialState, action) => {
-    function getUniqueValues(array){
-        let result = [];
-      const map = new Map();
-      for (const item of array) {
-        if (!map.has(item._id)) {
-          map.set(item._id, true);
-          result.push(item);
-        }
+  function getUniqueValues(array) {
+    let result = [];
+    const map = new Map();
+    for (const item of array) {
+      if (!map.has(item._id)) {
+        map.set(item._id, true);
+        result.push(item);
       }
-      return result
     }
+    return result;
+  }
   switch (action.type) {
     case "GET_ITINERARIES_BY_CITY":
       return {
@@ -31,7 +31,7 @@ const itinerariesReducer = (state = initialState, action) => {
       };
     case "GET_ACTIVITIES":
       let current = state.activities.concat(action.payload.activityList);
-      
+
       return {
         ...state,
         activities: getUniqueValues(current),
@@ -50,20 +50,36 @@ const itinerariesReducer = (state = initialState, action) => {
         itineraries: newList,
       };
     case "GET_COMMENTS":
-        let commentList = state.comments.concat(action.payload)
+      let commentList = state.comments.concat(action.payload.info);
       return {
         ...state,
         comments: getUniqueValues(commentList),
       };
     case "UPLOAD_COMMENT":
-      console.log("REDUCER: esto se esta pusheando a la lista auxiliar");
-      console.log(action.payload);
-      let list = state.comments.push(action.payload);
-      console.log("REDUCER: esto se sube al store principal");
-      console.log(list);
+      let list = state.comments.concat(action.payload);
+
       return {
         ...state,
-        comments: list,
+        comments: getUniqueValues(list),
+      };
+    case "DELETE_COMMENT":
+      let actualComments = state.comments.filter(
+        (comment) => comment._id !== action.payload._id
+      );
+      return {
+        ...state,
+        comments: actualComments,
+      };
+    case "EDIT_COMMENT":
+      let editedComments = state.comments.map((comment) => {
+        if (comment._id === action.payload._id) {
+          return { ...comment, message: action.payload.message };
+        }
+        return comment;
+      });
+      return {
+        ...state,
+        comments: editedComments,
       };
     default:
       return state;

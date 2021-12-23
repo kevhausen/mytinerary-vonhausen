@@ -19,7 +19,6 @@ const interactionsControllers = {
   },
   getCommentsByItineraryId: async (req, res) => {
     try {
-        console.log(req.params.itineraryId)
       let commentList = await Comment.find({
         itinerary: req.params.itineraryId,
       }).populate({ path: "user", select: ["email", "image", "name"] });
@@ -31,10 +30,18 @@ const interactionsControllers = {
   postComment: async (req, res) => {
     const { user, itinerary, message } = req.body;
     try {
-      await new Comment({ user, itinerary, message }).save();
+      const newComment = new Comment({ user, itinerary, message });
+      let comment = await newComment
+        .save()
+        .then((newComment) =>
+          newComment.populate({
+            path: "user",
+            select: ["email", "image", "name"],
+          })
+        );
       res.json({
         success: true,
-        response: "Uploaded comment with message: " + message,
+        response: comment,
         error: null,
       });
     } catch (e) {
@@ -43,11 +50,21 @@ const interactionsControllers = {
     }
   },
   editComment: async (req, res) => {
+      console.log("me llega esto desde el front")
+      console.log(req.body)
+      const {id, message} = req.body
     try {
-      let list = await Comment.findOneAndUpdate({ _id: req.body.id }, { message:req.body.message },{ new: true });
+      let editedComment = await Comment.findOneAndUpdate(
+        { _id: id},
+        { message },
+        { new: true }
+      );
+      console.log('esto devuelve el await')
+      console.log(editedComment)
       res.json({
         success: true,
-        response:list,});
+        response: editedComment,
+      });
     } catch (e) {
       res.json({ success: false, error: e });
       console.error(e);
@@ -55,11 +72,10 @@ const interactionsControllers = {
   },
   deleteComment: async (req, res) => {
     try {
-      await Comment.findOneAndDelete({ _id: req.body.id });
-      res.json({
-        success: true,
-        response: "Deleted comment with id" + req.body.id,
+      let comment = await Comment.findOneAndDelete({
+        _id: req.params.itineraryId,
       });
+      res.json({ success: true, error: null, response: comment });
     } catch (e) {
       res.json({ success: false, error: e });
       console.error(e);

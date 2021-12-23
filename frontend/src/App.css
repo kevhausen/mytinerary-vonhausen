@@ -115,8 +115,6 @@ div a {
 
 .form-sign{
     border-radius: 0px 0px 0px 0px;
-    /* border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px; */
     background-color: var(--mainColor);
     box-shadow: 5px 5px 10px var(--mainColorDark);
 }
@@ -290,6 +288,44 @@ div a {
     background-position: center; 
     background-blend-mode: var(--mainColor); 
 }
+.modal-button{
+    transition: .2s !important;
+    background-color: rgb(233, 6, 6) !important;
+    border: 2px solid white !important;
+    border-radius: 10px !important;
+    padding: 5px 15px 5px 15px !important;
+    color:white !important;
+    font-size: 1.4rem !important;
+}
+.modal-button:hover{
+    transition: .2s !important;
+    background-color: rgb(177, 17, 17) !important;
+}
+.modal-image-container{
+    background-color:#122e43;
+
+}
+.modal-body-container{
+    background-color:#5998c9;
+}
+
+.modal-comment{
+    background-color:#df4742;
+}
+
+.send-message-button{
+    transition: .2s;
+    background-color: var(--mainColorDark);
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 2px 6px 2px 6px;
+    color:white;
+    font-size: 1.4rem;
+}
+.send-message-button:hover{
+    transition: .2s;
+    background-color: var(--mainColorLight);
+}
 
 .activity-image:hover{
     transition: .2s;
@@ -299,10 +335,20 @@ div a {
     font-size: 2rem;
     text-shadow: 2px 2px black;
 }
+.comment-pencil{
+    filter: invert(65%) sepia(16%) saturate(274%) hue-rotate(162deg) brightness(89%) contrast(85%);
+}
+.comment-pencil:hover{
+    filter: invert(65%) sepia(16%) saturate(274%) hue-rotate(162deg) brightness(150%) contrast(85%);
+    cursor: pointer;
+}
 
 .activity-description{
     visibility: hidden;
 
+}
+.activity-container{
+    height: 35vh;
 }
 .activity-button{
     transition: .2s;
@@ -322,12 +368,25 @@ div a {
 .activity-button:active{
     animation: press 0.05s 1 linear;
 }
+.activity-main-container{
+    background-image: linear-gradient(to bottom,  #082135, #010d16);
+
+}
+.comment-main-container{
+    background-image: linear-gradient(to bottom, #274e6b,#173852);
+}
 
 .activity-description:hover{
     visibility: visible;
 }
+.comment-container{
+    height: 35vh;
+    overflow: scroll;
+    overflow-x: hidden
+}
 .hourglass{
     width: 2rem;
+    filter: invert(100%) sepia(0%) saturate(1788%) hue-rotate(99deg) brightness(118%) contrast(104%);
 }
 
 .bg-main {
@@ -353,7 +412,7 @@ div a {
 
 .like-black {
   width: 3rem;
-  filter: invert(36%) sepia(98%) saturate(371%) hue-rotate(100deg) brightness(94%) contrast(88%);
+  filter: invert(86%) sepia(21%) saturate(7217%) hue-rotate(353deg) brightness(107%) contrast(103%);
 }
 .like:active {
   animation: press 0.1s 1 linear;
@@ -655,6 +714,18 @@ hr.dashed {
   .publisher-name {
     font-size: 1rem;
   }
+  .activity-image{
+      margin-bottom: 10px !important;
+  }
+  .activity-image-container{
+      display: flex !important;
+      flex-direction: column !important;
+      
+  }
+  .activity-duration-container{
+      display: none !important;
+  }
+
 }
 
 @media only screen and (max-width: 780px) {
