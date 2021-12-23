@@ -312,6 +312,10 @@ div a {
 .modal-comment{
     background-color:#df4742;
 }
+.account-image-portrait{
+    width: 5rem !important;
+    height: 5rem;
+}
 
 .send-message-button{
     transition: .2s;

@@ -81,5 +81,17 @@ const interactionsControllers = {
       console.error(e);
     }
   },
+  getCommentsByUser: async (req,res)=>{
+      try{
+          console.log(req.params)
+          let comments = await Comment.find()
+          console.log(comments)
+          res.json({ success: true, error: null, response: comments });
+      }catch(e){
+          console.log(e)
+        res.json({ success: false, error: e });
+
+      }
+  }
 };
 module.exports = interactionsControllers;

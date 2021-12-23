@@ -27,7 +27,7 @@ const {
 
 const { getCountries, uploadCountries, saveUser, getUsers, signIn , modifyUser, authUser} = authControllers;
 const {uploadActivity, getActivity,modifyActivity,getActivitiesByItinerary} = activityControllers
-const { setLike,getCommentsByItineraryId,postComment,modifyComment, editComment, deleteComment} = interactionsControllers
+const { setLike,getCommentsByItineraryId,postComment,modifyComment, editComment, deleteComment, getCommentsByUser} = interactionsControllers
 
 Router.route("/carrousel-cities").get(getCarrouselCities);
 
@@ -63,6 +63,8 @@ Router.route("/interaction/comments")
   
 
 Router.route("/interaction/comments/:itineraryId").get(getCommentsByItineraryId).delete(deleteComment)
+
+Router.route("/interaction/comments/:userId").get(getCommentsByUser)
 
 
 module.exports = Router;
