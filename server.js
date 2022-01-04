@@ -13,6 +13,7 @@ app.use(passport.initialize())
 app.use("/api", router);
 
 const PORT = process.env.PORT || 4000
-app.listen(PORT, () => {
-  console.log("listening in port 4000...");
+const HOST = process.env.HOST || '0.0.0.0'
+app.listen(PORT,HOST, () => {
+  console.log(`listening in port ${PORT} on host ${HOST}`);
 });
