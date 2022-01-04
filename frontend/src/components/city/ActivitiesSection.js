@@ -24,8 +24,6 @@ function ActivitiesSection(props) {
   const [editComment, setEditComment] = useState("");
   const [modalShow, setModalShow] = useState(false);
 
-
-
   const popover = (
     <Popover id="popover-basic">
       <Popover.Header className="popover-header" as="h3">
@@ -104,7 +102,7 @@ function ActivitiesSection(props) {
     } else if (selectedComment === "") {
       setSelectedComment(id);
       setEditComment(message);
-    } else if (selectedComment !== "" && selectedComment !== id) {
+    } else if (selectedComment !== "" && selectedComment !== id){
       setSelectedComment(id);
       setEditComment(message);
     }

@@ -31,11 +31,10 @@ const interactionActions = {
     },
     editComment: (data)=>{
         return async (dispatch)=>{
-            console.log('ACTION: esto llega del component al hacer enter')
-            console.log(data)
+
             let response = await axios.put("http://localhost:4000/api/interaction/comments/", data)
-            console.log('ACTION: ESTO DEVUELVE EL CONTROLADOR')
-            console.log(response.data.response)
+
+
             dispatch({type:"EDIT_COMMENT", payload: response.data.response})
         }
     }

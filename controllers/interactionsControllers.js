@@ -22,7 +22,7 @@ const interactionsControllers = {
       let commentList = await Comment.find({
         itinerary: req.params.itineraryId,
       }).populate({ path: "user", select: ["email", "image", "name"] });
-      res.json({ success: true, error: null, response: commentList });
+      res.json({success: true, error: null, response: commentList});
     } catch (e) {
       res.json({ success: false, error: e, response: null });
     }
@@ -50,8 +50,6 @@ const interactionsControllers = {
     }
   },
   editComment: async (req, res) => {
-      console.log("me llega esto desde el front")
-      console.log(req.body)
       const {id, message} = req.body
     try {
       let editedComment = await Comment.findOneAndUpdate(
@@ -59,8 +57,6 @@ const interactionsControllers = {
         { message },
         { new: true }
       );
-      console.log('esto devuelve el await')
-      console.log(editedComment)
       res.json({
         success: true,
         response: editedComment,
