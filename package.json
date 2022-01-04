@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
-    "dev":"node server.js"
+    "dev": "node server.js",
+    "predeploy": "npm run build",
+"deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
@@ -23,12 +25,13 @@
   "bugs": {
     "url": "https://github.com/kevhausen/mytinerary-vonhausen/issues"
   },
-  "homepage": "https://github.com/kevhausen/mytinerary-vonhausen#readme",
+  "homepage": "https://kevhausen.github.io/mytinerary-vonhausen/",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "gh-pages": "^3.2.3",
     "joi": "^17.5.0",
     "joi-password-complexity": "^5.1.0",
     "jsonwebtoken": "^8.5.1",
