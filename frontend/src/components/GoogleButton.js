@@ -10,7 +10,7 @@ function GoogleButton (){
         <>
         
         <GoogleLogin
-    clientId="190201580680-u46pho0n2vjalcan540tm22oan4vhc0v.apps.googleusercontent.com"
+    clientId={process.env.GOOGLE_KEY}
     buttonText="Login"
     onSuccess={responseGoogle}
     onFailure={responseGoogle}
