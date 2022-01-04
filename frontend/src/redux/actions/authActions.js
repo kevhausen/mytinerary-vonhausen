@@ -3,14 +3,14 @@ import axios from "axios";
 const authActions = {
   getCountries: () => {
     return async (dispatch) => {
-      let response = await axios.get("http://localhost:4000/api/countries");
+      let response = await axios.get("https://mytinerary-vonhausen.herokuapp.com/api/countries");
       dispatch({ type: "GET_COUNTRIES", payload: response.data.response });
     };
   },
   saveUser: (user) => {
     return async (dispatch) => {
       let response = await axios.post(
-        "http://localhost:4000/api/auth/signup",
+        "https://mytinerary-vonhausen.herokuapp.com/api/auth/signup",
         user
       );
       if (response.data.response) {
@@ -26,7 +26,7 @@ const authActions = {
   signIn: (user) => {
     return async (dispatch) => {
       let response = await axios.post(
-        "http://localhost:4000/api/auth/signin",
+        "https://mytinerary-vonhausen.herokuapp.com/api/auth/signin",
         user
       );
       if (response.data.response) {
@@ -46,7 +46,7 @@ const authActions = {
   modifyUser: (user) => {
     return async (dispatch) => {
       let response = await axios.put(
-        "http://localhost:4000/api/auth/signup",
+        "https://mytinerary-vonhausen.herokuapp.com/api/auth/signup",
         user
       );
       dispatch({ type: "MODIFY_USER", payload: response.data });
@@ -63,7 +63,7 @@ const authActions = {
     return async (dispatch) => {
       try {
         const token = localStorage.getItem("token");
-        const user = await axios.get("http://localhost:4000/api/auth/user", {
+        const user = await axios.get("https://mytinerary-vonhausen.herokuapp.com/api/auth/user", {
           headers: { Authorization: "Bearer " + token },
         });
         dispatch({ type: "IS_AUTH", payload: user.data.response });

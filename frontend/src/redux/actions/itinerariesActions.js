@@ -3,7 +3,7 @@ import axios from "axios";
 const itinerariesActions = {
   getItinerariesByCity: (id) => {
     return async (dispatch) => {
-      let res = await axios.get("http://localhost:4000/api/itineraries/" + id);
+      let res = await axios.get("https://mytinerary-vonhausen.herokuapp.com/api/itineraries/" + id);
       let info = res.data.response.filtered;
       let loading = false;
       dispatch({ type: "GET_ITINERARIES_BY_CITY", payload: { info, loading } });
@@ -24,7 +24,7 @@ const itinerariesActions = {
       if (idList.includes(id)) {
         res = activities;
       } else {
-        let resDb = await axios.post("http://localhost:4000/api/activities", {
+        let resDb = await axios.post("https://mytinerary-vonhausen.herokuapp.com/api/activities", {
           id: id,
         });
         res = resDb.data.response;

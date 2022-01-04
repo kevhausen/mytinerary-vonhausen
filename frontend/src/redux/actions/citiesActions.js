@@ -4,7 +4,7 @@ const citiesActions = {
   getCities: () => {
     return async (dispatch) => {
       let response = await axios.get(
-        "http://localhost:4000/api/carrousel-cities"
+        "https://mytinerary-vonhausen.herokuapp.com/api/carrousel-cities"
       );
       let loading = false;
       let info = response.data.response.carrouselCities;
@@ -13,7 +13,7 @@ const citiesActions = {
   },
   getAllCities: () => {
     return async (dispatch) => {
-      let response = await axios.get("http://localhost:4000/api/cities");
+      let response = await axios.get("https://mytinerary-vonhausen.herokuapp.com/api/cities");
       let info = response.data.response.cities;
       let loading = false;
       dispatch({ type: "GET_ALL_CITIES", payload: { info, loading } });
@@ -26,7 +26,7 @@ const citiesActions = {
   },
   getCity: (id) => {
     return async (dispatch) => {
-      let res = await axios.get("http://localhost:4000/api/cities/" + id);
+      let res = await axios.get("https://mytinerary-vonhausen.herokuapp.com/api/cities/" + id);
       let info = res.data.response.city;
       let loading = false;
       dispatch({ type: "GET_CITY", payload: { info, loading } });
