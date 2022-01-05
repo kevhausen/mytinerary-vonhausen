@@ -422,7 +422,7 @@ class SignUp extends React.Component {
                   </Form>
                   <p className="text-white">or sign in with Google</p>
                   <GoogleLogin
-                    clientId={process.env.GOOGLE_KEY}
+                    clientId='190201580680-3dcto480d2fth2rk2qnsv37jj1l8f2bt.apps.googleusercontent.com'
                     buttonText="Sign in with Google"
                     onSuccess={this.responseGoogle}
                     onFailure={this.responseGoogle}
