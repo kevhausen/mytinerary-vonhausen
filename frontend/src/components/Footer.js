@@ -10,6 +10,8 @@ import Image from "react-bootstrap/Image";
 import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
 import Logo from "../assets/logo2.png";
+import Github from "../assets/social_icons/github.png"
+
 
 function Footer() {
   return (
@@ -17,7 +19,8 @@ function Footer() {
       <Row className="footer-row">
         <Col className="d-flex justify-content-center align-items-center flex-column">
           <img className="footer-logo" src={Logo} alt="Logo" />
-          <p>MyTinerary &copy; 2021. All rights reserved.</p>
+          <p>Kevin von Hausen - 2022.  </p>
+          <a href="https://github.com/kevhausen" target="_blank" rel="noreferrer" > <img className="github-icon" src={Github} alt='github' ></img> </a>
         </Col>
         <Col className="d-flex justify-content-center flex-column">
           <Nav className="d-flex justify-content-center container align-items-center flex-column p-0">
