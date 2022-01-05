@@ -6,6 +6,7 @@ import Col from "react-bootstrap/Col";
 const ActionCall = () => {
   return (
     <div className="d-flex action-call-container p-3 flex-column">
+        <Container className="mock-container" ></Container>
       <Container className="action-call d-flex col-10 justify-content-center align-content-center col-lg-9 col-md-9 col-xl-9 col-sm-9 ">
         <div className="d-flex flex-column align-items-center hero-mytinerary mb-4">
           <img src={Ballon} alt="Ballon Logo" className="ballon" />

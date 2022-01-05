@@ -6,6 +6,7 @@ function FirstSection() {
     <div className="firstSection">
       <MainNav />
       <ActionCall />
+    
     </div>
   );
 }
