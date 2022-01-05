@@ -763,7 +763,6 @@ hr.dashed {
     }
     .welcome-sign{
         border-radius: 0px;
-        display: none !important;
     }
 }
 @media (min-width: 768px){
